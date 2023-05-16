@@ -1,0 +1,22 @@
+.opponentList {
+    overflow-y: auto;
+    width: 600px;
+    height: 250px;
+    margin-bottom: 25px;
+}
+
+.opponentList::-webkit-scrollbar {
+    width: 25px;
+}
+
+.opponentList::-webkit-scrollbar-track {
+    border: none;
+    border-left: 10px solid #000000;
+    background: #222222;
+}
+
+.opponentList::-webkit-scrollbar-thumb {
+    border: none;
+    border-left: 10px solid #000000;
+    background: #ffaa00;
+}

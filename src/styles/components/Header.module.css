@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ffaa00;
+    padding: 25px 100px;
+    background-color: #000000;
+}
+
+.header a {
+    text-decoration: none;
+}
+
+.header nav a {
+    padding-right: 50px;
+    text-transform: uppercase;
+}
+
+.header nav a:hover {
+    color: #ffaa00;
+}
+
+.header nav a:last-child {
+    padding-right: 0;
+}

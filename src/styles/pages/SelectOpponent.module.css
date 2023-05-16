@@ -1,0 +1,21 @@
+.selectOpponent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 81px);
+    padding: 100px;
+    background-color: #000000;
+}
+
+.selectOpponent h1 {
+    margin-bottom: 50px;
+}
+
+.selectOpponent a {
+    color: #ffaa00;
+}
+
+.selectOpponent button {
+    margin-top: 50px;
+}

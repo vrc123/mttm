@@ -1,0 +1,7 @@
+.analysisList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 1260px;
+    margin-top: 50px;
+}

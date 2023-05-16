@@ -1,0 +1,21 @@
+.scoreForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.scoreForm p {
+    margin-bottom: 10px;
+}
+
+.scoreForm input {
+    margin-bottom: 10px;
+}
+
+.scoreForm input:last-child {
+    margin-bottom: 0;
+}
+
+.scoreForm button {
+    margin-top: 50px;
+}

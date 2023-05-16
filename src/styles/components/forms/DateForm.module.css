@@ -1,0 +1,13 @@
+.dateForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.dateForm p {
+    margin-bottom: 10px;
+}
+
+.dateForm button {
+    margin-top: 50px;
+}

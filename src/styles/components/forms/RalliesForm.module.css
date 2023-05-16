@@ -1,0 +1,17 @@
+.ralliesForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.ralliesForm p {
+    margin-bottom: 10px;
+}
+
+.ralliesForm input:first-of-type {
+    margin-bottom: 10px;
+}
+
+.ralliesForm button {
+    margin-top: 50px;
+}

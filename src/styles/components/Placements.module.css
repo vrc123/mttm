@@ -1,0 +1,11 @@
+.placements{
+    display: flex;
+}
+
+.placements input{
+    margin-bottom: 10px;
+}
+
+.placements input:last-child{
+    margin-bottom: 0;
+}

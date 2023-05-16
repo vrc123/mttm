@@ -1,0 +1,22 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 81px);
+    padding: 100px;
+    background-color: #000000;
+}
+
+.home h1 {
+    margin-bottom: 50px;
+}
+
+.home p {
+    margin-bottom: 50px;
+}
+
+.home div {
+    display: flex;
+    gap: 20px;
+}

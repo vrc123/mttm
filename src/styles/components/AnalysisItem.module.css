@@ -1,0 +1,29 @@
+.analysisItem {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 4px;
+    padding: 25px;
+    background-color: #222222;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.analysisItem p {
+    margin-bottom: 10px;
+}
+
+.analysisItem p:last-of-type {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ffffff;
+}
+
+.analysisItem button {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.analysisItem button:last-child {
+    margin-bottom: 0;
+}

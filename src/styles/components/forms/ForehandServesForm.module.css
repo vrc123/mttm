@@ -1,0 +1,20 @@
+.forehandServesForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.forehandServesForm div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forehandServesForm div p {
+    margin: 25px 0 10px 0;
+}
+
+.forehandServesForm button {
+    margin-top: 50px;
+}

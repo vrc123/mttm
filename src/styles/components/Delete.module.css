@@ -1,0 +1,41 @@
+.deleteOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff80;
+}
+
+.delete {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    border: 2px solid #ffaa00;
+    border-radius: 10px;
+    padding: 25px;
+    background-color: #000000; 
+}
+
+.delete div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.delete div h2 {
+    margin-bottom: 25px;
+}
+
+.delete div button {
+    width: 100%;
+    margin-top: 25px;
+}

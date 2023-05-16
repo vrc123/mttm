@@ -1,0 +1,16 @@
+.outCome {
+    display: flex;
+    flex-direction: column;
+}
+
+.outCome p {
+    margin-top: 25px;
+}
+
+.outCome input {
+    margin-bottom: 10px;
+}
+
+.outCome input:last-child {
+    margin-bottom: 0;
+}
