@@ -1,7 +1,6 @@
 import styles from '@/styles/components/OpponentList.module.css'
-import { useDispatch } from 'react-redux';
-import { saveOpponentId } from '@/features/analysisSlice'
-import OpponentItem from './OpponentItem'
+import OpponentItem from './OpponentItem';
+import { useRouter } from 'next/router';
 
 interface Opponent {
     id: number;
@@ -13,23 +12,31 @@ interface Opponent {
 }
 
 interface OpponentListProps {
-   opponents: Opponent[];
+    query: string;
+    opponents: Opponent[];
 }
 
-export default function OpponentList({ opponents }: OpponentListProps) {
+export default function OpponentList({ opponents, query }: OpponentListProps) {
 
-    const dispatch = useDispatch()
+    const router = useRouter()
 
     return (
         <div className={styles.opponentList}>
-            {opponents.map((opponent) => {
-
-                function selectOpponent() {
-                    dispatch(saveOpponentId(opponent.id))
+            {opponents.filter(((opponent) => {
+                if (query.toLowerCase() === '') {
+                    return opponents
+                } else if (opponent.middleName == '') {
+                    if((opponent.firstName.toLowerCase() + ' ' + opponent.lastName.toLowerCase()).includes(query.toLocaleLowerCase())) {
+                        return opponents
+                    }
+                } else if (opponent.middleName != undefined) {
+                    if((opponent.firstName.toLowerCase() + ' ' + opponent.middleName.toLowerCase() + ' ' + opponent.lastName.toLowerCase()).includes(query.toLocaleLowerCase())) {
+                        return opponents
+                    }
                 }
-                
+            })).map((opponent) => {
                 return (
-                    <OpponentItem key={opponent.id} opponentId={opponent.id} firstName={opponent.firstName} middleName={opponent.middleName} lastName={opponent.lastName} country={opponent.country} onClick={selectOpponent} />
+                    <OpponentItem key={opponent.id} id={opponent.id} firstName={opponent.firstName} middleName={opponent.middleName} lastName={opponent.lastName} country={opponent.country} birthday={opponent.birthday} />
                 )
             })}
         </div>

@@ -51,7 +51,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
             <p>Country: {country}</p>
             <p>Score: {score}</p>
             <p>Date: {date}</p>
-            <Button variant='secondary' label='Visit' onClick={onClick} />
+            <Button variant='secondary' label='Show' onClick={onClick} />
             <Button variant='delete' label='Delete' onClick={openModal} />
             <Delete deleteItem={analysisDelete} setDeleteItem={setAnalysisDelete} error={error} setError={setError} deleteFunction={deleteAnalysis} />
         </div>

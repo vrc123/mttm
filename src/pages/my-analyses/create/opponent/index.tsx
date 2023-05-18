@@ -1,10 +1,10 @@
 import styles from '@/styles/pages/SelectOpponent.module.css'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../../../store'
+import { useDispatch } from 'react-redux'
+import { saveOpponentId } from '@/features/analysisSlice'
 import { useRouter } from 'next/router'
 import { supabase } from '../../../../../supabase-client'
-import OpponentList from '@/components/OpponentList'
+import SelectOpponentList from '@/components/SelectOpponentList'
 import Link from 'next/link'
 import Button from '@/components/Button'
 import Validation from '@/components/Validation'
@@ -33,10 +33,11 @@ interface Opponents {
 
 export default function SelectOpponent({ data }: Opponents) {
 
+    const [opponent, setOpponent] = useState(0)
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
 
-    const savedOpponentId = useSelector((state: RootState) => state.analysis.opponentId)
+    const dispatch = useDispatch()
 
     const router = useRouter()
 
@@ -44,23 +45,24 @@ export default function SelectOpponent({ data }: Opponents) {
 
         let validationArray = [];
 
-        if (savedOpponentId === 0) {
+        if (opponent === 0) {
             validationArray.push('- Please select an opponent')
         }
 
-        if (savedOpponentId != 0) {
+        if (opponent != 0) {
+            dispatch(saveOpponentId(opponent))
             router.push("/my-analyses/create/score")
         } else {
             setValidation(true)
             setValidations(validationArray)
         }
-      }
+    }
 
     return (
         <>
             <div className={styles.selectOpponent}>
                 <h1>Select your opponent</h1>
-                {data.length != 0 && <OpponentList opponents={data} />}
+                {data.length != 0 && <SelectOpponentList opponents={data} selectedOpponentValue={opponent} changeOpponent={setOpponent} />}
                 <p>Can't find the right opponent to select? <Link href='/my-analyses/create/opponent/add'>Click here</Link> to add a new opponent.</p>
                 <Button variant='primary' label='Next' onClick={next} />
                 <Validation validation={validation} setValidation={setValidation} validations={validations} />

@@ -1,20 +1,20 @@
-.backhandServesForm {
+.servesForm {
     display: flex;
     flex-direction: column;
     width: 300px;
 }
 
-.backhandServesForm div {
+.servesForm div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.backhandServesForm div p {
+.servesForm div p {
     margin: 25px 0 10px 0;
 }
 
-.backhandServesForm button {
+.servesForm button {
     margin-top: 50px;
 }

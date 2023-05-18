@@ -12,6 +12,10 @@
     margin-bottom: 50px;
 }
 
-.myAnalyses p {
-    margin-bottom: 50px;
+.myAnalyses input {
+    margin-top: 50px;
+}
+
+.myAnalyses a {
+    color: #ffaa00;
 }

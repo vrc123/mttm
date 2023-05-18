@@ -1,72 +1,29 @@
 import styles from '@/styles/components/forms/ScoreForm.module.css'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { saveScore } from '@/features/analysisSlice'
-import { useRouter } from 'next/router'
 import TextField from '../TextField'
 import Button from '../Button'
 import Validation from '../Validation'
 
-export default function ScoreForm() {
+interface ScoreFormProps {
+  buttonLabel: string;
+  playerSetsValue: string;
+  opponentSetsValue: string;
+  validationValue: boolean;
+  validationsValue: string[];
+  onChangePlayerSets: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeOpponentSets: React.ChangeEventHandler<HTMLInputElement>;
+  changeValidation: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+}  
 
-    const [playerSets, setPlayerSets] = useState('')
-    const [opponentSets, setOpponentSets] = useState('')
-    const [validation, setValidation] = useState(false)
-    const [validations, setValidations] = useState<string[]>([])
-
-    const dispatch = useDispatch()
-
-    const router = useRouter();
-
-    function addScore(e: { preventDefault: () => void }) {
-        e.preventDefault()
-
-        let validationArray = []
-
-        if (!playerSets) {
-            validationArray.push("- Fill the player's sets field")
-        }
-
-        if (isNaN(Number(playerSets))) {
-            validationArray.push("- Player's sets needs to be a number")
-        }
-
-        if (Number(playerSets) > 4) {
-            validationArray.push("- The number of player's sets is set too high")
-        }
-
-        if (!opponentSets) {
-            validationArray.push("- Fill the opponent's sets field")
-        }
-
-        if (isNaN(Number(opponentSets))) {
-            validationArray.push("- Opponent's sets needs to be a number")
-        }
-
-        if (Number(opponentSets) > 4) {
-            validationArray.push("- The number of opponent's sets is set too high")
-        }
-
-        if (Number(playerSets) == Number(opponentSets)) {
-            validationArray.push("- The number of player's sets can't be equal to the number of opponent's sets")
-        }
-
-        if (validationArray.length === 0) {
-            dispatch(saveScore(playerSets + '/' + opponentSets))
-            router.push('/my-analyses/create/forehand-serves')
-        } else {
-            setValidation(true)
-            setValidations(validationArray)
-        }
-  }
+export default function ScoreForm({ buttonLabel, playerSetsValue, opponentSetsValue, validationValue, validationsValue, onChangePlayerSets, onChangeOpponentSets, changeValidation, onSubmit }: ScoreFormProps) {
 
   return (
-    <form className={styles.scoreForm} onSubmit={addScore}>
+    <form className={styles.scoreForm} onSubmit={onSubmit}>
       <p>Type the score of the match:</p>
-      <TextField placeholder='Player sets' value={playerSets} onChange={(e) => setPlayerSets(e.target.value)} />
-      <TextField placeholder='Opponent sets' value={opponentSets} onChange={(e) => setOpponentSets(e.target.value)} />
-      <Button variant='primary' label='Next' />
-      <Validation validation={validation} setValidation={setValidation} validations={validations} />
+      <TextField placeholder='Player sets' value={playerSetsValue} onChange={onChangePlayerSets} />
+      <TextField placeholder='Opponent sets' value={opponentSetsValue} onChange={onChangeOpponentSets} />
+      <Button variant='primary' label={buttonLabel} />
+      <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
     </form>
   )
 }

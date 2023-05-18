@@ -1,0 +1,21 @@
+.myOpponents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 81px);
+    padding: 100px;
+    background-color: #000000;
+}
+
+.myOpponents h1 {
+    margin-bottom: 50px;
+}
+
+.myOpponents input {
+    margin-top: 50px;
+}
+
+.myOpponents a {
+    color: #ffaa00;
+}
