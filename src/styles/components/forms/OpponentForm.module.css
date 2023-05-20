@@ -4,15 +4,15 @@
     width: 300px;
 }
 
-.opponentForm p {
-    margin-bottom: 10px;
+.opponentForm label {
+    margin-bottom: 5px;
 }
 
 .opponentForm input {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.opponentForm input:last-child {
+.opponentForm input:last-of-type {
     margin-bottom: 0;
 }
 

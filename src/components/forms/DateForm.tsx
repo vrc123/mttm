@@ -17,8 +17,8 @@ export default function DateForm({ buttonLabel, dateValue, validationValue, vali
 
   return (
     <form className={styles.dateForm} onSubmit={onSubmit}>
-      <p>Select the date the match was played:</p>
-      <CalenderPicker value={dateValue} onChange={onChangeDate}/>
+      <label htmlFor='date'>Match date*</label>
+      <CalenderPicker id='date' value={dateValue} onChange={onChangeDate}/>
       <Button variant='primary' label={buttonLabel} />
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
     </form>

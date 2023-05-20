@@ -32,14 +32,15 @@ export default function RalliesForm({ buttonLabel, moreValue, lessValue, moreWin
 
   return (
     <form className={styles.ralliesForm} onSubmit={onSubmit}>
-        <p>Distribute the match rallies:</p>
-        <TextField placeholder='More than 3 balls' value={moreValue} onChange={onChangeMore} />
-        <TextField placeholder='Less than 3 balls' value={lessValue} onChange={onChangeLess} />
-        {moreValue != '' && <Outcome label='Distribute wins and loses for rallies more than 3 balls:' winsValue={moreWinsValue} winsOnChange={onChangeMoreWins} losesValue={moreLosesValue} losesOnChange={onChangeMoreLoses} />}
-        {lessValue != '' && <Outcome label='Distribute wins and loses for rallies less than 3 balls:' winsValue={lessWinsValue} winsOnChange={onChangeLessWins} losesValue={lessLosesValue} losesOnChange={onChangeLessLoses} />}
-        <Button variant='primary' label={buttonLabel} />
-        <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
-        <Error error={errorValue} setError={changeError} />
+      <label htmlFor='more'>More than 3 balls</label>
+      <TextField id='more' placeholder='Type here' value={moreValue} onChange={onChangeMore} />
+      <label htmlFor='less'>Less than 3 balls</label>
+      <TextField id='less' placeholder='Type here' value={lessValue} onChange={onChangeLess} />
+      {(moreValue != '' || moreWinsValue != '' || moreLosesValue != '') && <Outcome label='Distribute wins and loses for rallies more than 3 balls:' winsValue={moreWinsValue} winsOnChange={onChangeMoreWins} losesValue={moreLosesValue} losesOnChange={onChangeMoreLoses} />}
+      {(lessValue != '' || lessWinsValue != '' || lessLosesValue != '') && <Outcome label='Distribute wins and loses for rallies less than 3 balls:' winsValue={lessWinsValue} winsOnChange={onChangeLessWins} losesValue={lessLosesValue} losesOnChange={onChangeLessLoses} />}
+      <Button variant='primary' label={buttonLabel} />
+      <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
+      <Error error={errorValue} setError={changeError} />
     </form>
   )
 }

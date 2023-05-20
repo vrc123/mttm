@@ -14,8 +14,10 @@ export default function Outcome({ label, winsValue, winsOnChange, losesValue, lo
   return (
     <div className={styles.outCome}>
       <p>{label}</p>
-      <TextField placeholder='Wins' value={winsValue} onChange={winsOnChange} />
-      <TextField placeholder='Loses' value={losesValue} onChange={losesOnChange} />
+      <label htmlFor='wins'>Wins</label>
+      <TextField id='wins' placeholder='Type here' value={winsValue} onChange={winsOnChange} />
+      <label htmlFor='loses'>Loses</label>
+      <TextField id='loses' placeholder='Type here' value={losesValue} onChange={losesOnChange} />
     </div>
   )
 }

@@ -4,15 +4,12 @@
     width: 300px;
 }
 
-.servesForm div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.servesForm label {
+    margin-bottom: 5px;
 }
 
-.servesForm div p {
-    margin: 25px 0 10px 0;
+.servesForm input:first-of-type {
+    margin-bottom: 20px;
 }
 
 .servesForm button {

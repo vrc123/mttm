@@ -1,4 +1,4 @@
-.addBackhandRecieves {
+.addRecieves {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,6 +8,6 @@
     background-color: #000000;
 }
 
-.addBackhandRecieves h1 {
+.addRecieves h1 {
     margin-bottom: 50px;
 }

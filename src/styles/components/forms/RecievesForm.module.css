@@ -4,15 +4,12 @@
     width: 300px;
 }
 
-.recievesForm div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.recievesForm label {
+    margin-bottom: 5px;
 }
 
-.recievesForm div p {
-    margin: 25px 0 10px 0;
+.recievesForm input:first-of-type {
+    margin-bottom: 20px;
 }
 
 .recievesForm button {

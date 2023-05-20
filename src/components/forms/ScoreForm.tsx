@@ -19,9 +19,10 @@ export default function ScoreForm({ buttonLabel, playerSetsValue, opponentSetsVa
 
   return (
     <form className={styles.scoreForm} onSubmit={onSubmit}>
-      <p>Type the score of the match:</p>
-      <TextField placeholder='Player sets' value={playerSetsValue} onChange={onChangePlayerSets} />
-      <TextField placeholder='Opponent sets' value={opponentSetsValue} onChange={onChangeOpponentSets} />
+      <label htmlFor='playerSets'>Player sets*</label>
+      <TextField id='playerSets' placeholder='Type here' value={playerSetsValue} onChange={onChangePlayerSets} />
+      <label htmlFor='opponentSets'>Opponent sets*</label>
+      <TextField id='opponentSets' placeholder='Type here' value={opponentSetsValue} onChange={onChangeOpponentSets} />
       <Button variant='primary' label={buttonLabel} />
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
     </form>

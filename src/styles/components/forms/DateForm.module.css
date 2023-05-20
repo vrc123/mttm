@@ -4,8 +4,8 @@
     width: 300px;
 }
 
-.dateForm p {
-    margin-bottom: 10px;
+.dateForm label {
+    margin-bottom: 5px;
 }
 
 .dateForm button {

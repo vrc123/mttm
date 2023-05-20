@@ -53,7 +53,7 @@ export default function AddScore() {
 
         if (validationArray.length === 0) {
             dispatch(saveScore(playerSets + '/' + opponentSets))
-            router.push('/my-analyses/create/forehand-serves')
+            router.push('/my-analyses/create/serves')
         } else {
             setValidation(true)
             setValidations(validationArray)

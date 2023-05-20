@@ -1,5 +1,16 @@
-.placements{
+.placements {
     display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.placements p {
+    margin-bottom: 25px;
+}
+
+.placements label {
+    text-align: left;
+    margin-bottom: 5px;
 }
 
 .placements input{

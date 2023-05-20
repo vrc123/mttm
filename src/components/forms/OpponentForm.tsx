@@ -29,12 +29,16 @@ export default function OpponentForm({ buttonLabel, firstNameValue, middleNameVa
 
   return (
     <form className={styles.opponentForm} onSubmit={onSubmit}>
-      <p>Fill in the opponent information:</p>
-      <TextField placeholder='First Name' value={firstNameValue} onChange={onChangeFirstName} />
-      <TextField placeholder='Middle Name' value={middleNameValue} onChange={onChangeMiddleName} />
-      <TextField placeholder='Last Name' value={lastNameValue} onChange={onChangeLastName} />
-      <TextField placeholder='Country' value={countryValue} onChange={onChangeCountry} />
-      <CalenderPicker value={birthdayValue} onChange={onChangeBirthday} />
+      <label htmlFor='firstName'>First name*</label>
+      <TextField id='firstName' placeholder='Type here' value={firstNameValue} onChange={onChangeFirstName} />
+      <label htmlFor='middleName'>Middle name</label>
+      <TextField id='middleName' placeholder='Type here' value={middleNameValue} onChange={onChangeMiddleName} />
+      <label htmlFor='lastName'>Last name*</label>
+      <TextField id='lastName' placeholder='Type here' value={lastNameValue} onChange={onChangeLastName} />
+      <label htmlFor='country'>Country*</label>
+      <TextField id='country' placeholder='Type here' value={countryValue} onChange={onChangeCountry} />
+      <label htmlFor='birthday'>Birthday*</label>
+      <CalenderPicker id='birthday' value={birthdayValue} onChange={onChangeBirthday} />
       <Button variant='primary' label={buttonLabel} />
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
       <Error error={errorValue} setError={changeError} />

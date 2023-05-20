@@ -142,20 +142,12 @@ export default function Analysis({ data }: AnalysisProps) {
         router.push('/my-analyses/edit/score/' + data.id)
     }
 
-    function editFhServes() {
-        router.push('/my-analyses/edit/forehand-serves/' + data.id)
+    function editServes() {
+        router.push('/my-analyses/edit/serves/' + data.id)
     }
 
-    function editBhServes() {
-        router.push('/my-analyses/edit/backhand-serves/' + data.id)
-    }
-
-    function editFhRecieves() {
-        router.push('/my-analyses/edit/forehand-recieves/' + data.id)
-    }
-
-    function editBhRecieves() {
-        router.push('/my-analyses/edit/backhand-recieves/' + data.id)
+    function editRecieves() {
+        router.push('/my-analyses/edit/recieves/' + data.id)
     }
 
     function editRallies() {
@@ -209,9 +201,6 @@ export default function Analysis({ data }: AnalysisProps) {
                 <p>Short in forehand: {Number(data.serves.forehandServes.shortFh)}</p>
                 <p>Short in middle: {Number(data.serves.forehandServes.shortMiddle)}</p>
                 <p>Short in backhand: {Number(data.serves.forehandServes.shortBh)}</p>
-                <div>
-                    <Button variant='secondary' label='Edit' onClick={editFhServes} />
-                </div>
                 <h3>Backhand serves</h3>
                 <p>Long in forehand: {Number(data.serves.backhandServes.longFh)}</p>
                 <p>Long in middle: {Number(data.serves.backhandServes.longMiddle)}</p>
@@ -223,7 +212,7 @@ export default function Analysis({ data }: AnalysisProps) {
                 <p>Short in middle: {Number(data.serves.backhandServes.shortMiddle)}</p>
                 <p>Short in backhand: {Number(data.serves.backhandServes.shortBh)}</p>
                 <div>
-                    <Button variant='secondary' label='Edit' onClick={editBhServes} />
+                    <Button variant='secondary' label='Edit' onClick={editServes} />
                 </div>
             </div>
             <div>
@@ -247,9 +236,6 @@ export default function Analysis({ data }: AnalysisProps) {
                 <p>Short in forehand: {Number(data.recieves.forehandRecieves.shortFh)}</p>
                 <p>Short in middle: {Number(data.recieves.forehandRecieves.shortMiddle)}</p>
                 <p>Short in backhand: {Number(data.recieves.forehandRecieves.shortBh)}</p>
-                <div>
-                    <Button variant='secondary' label='Edit' onClick={editFhRecieves} />
-                </div>
                 <h3>Backhand recieves</h3>
                 <p>Long in forehand: {Number(data.recieves.backhandRecieves.longFh)}</p>
                 <p>Long in middle: {Number(data.recieves.backhandRecieves.longMiddle)}</p>
@@ -261,7 +247,7 @@ export default function Analysis({ data }: AnalysisProps) {
                 <p>Short in middle: {Number(data.recieves.backhandRecieves.shortMiddle)}</p>
                 <p>Short in backhand: {Number(data.recieves.backhandRecieves.shortBh)}</p>
                 <div>
-                    <Button variant='secondary' label='Edit' onClick={editBhRecieves} />
+                    <Button variant='secondary' label='Edit' onClick={editRecieves} />
                 </div>
             </div>
             <div>

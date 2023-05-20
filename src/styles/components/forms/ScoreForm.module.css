@@ -4,15 +4,15 @@
     width: 300px;
 }
 
-.scoreForm p {
-    margin-bottom: 10px;
+.scoreForm label {
+    margin-bottom: 5px;
 }
 
 .scoreForm input {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.scoreForm input:last-child {
+.scoreForm input:last-of-type {
     margin-bottom: 0;
 }
 

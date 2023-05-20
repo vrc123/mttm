@@ -7,26 +7,46 @@ import Error from '../Error'
 
 interface RecievesFormProps {
   buttonLabel: string;
-  recievesValue: string;
-  onChangeRecieves: React.ChangeEventHandler<HTMLInputElement>;
-  longFhValue: string;
-  onChangeLongFh: React.ChangeEventHandler<HTMLInputElement>;
-  longMiddleValue: string;
-  onChangeLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
-  longBhValue: string;
-  onChangeLongBh: React.ChangeEventHandler<HTMLInputElement>;
-  halfLongFhValue: string;
-  onChangeHalfLongFh: React.ChangeEventHandler<HTMLInputElement>;
-  halfLongMiddleValue: string;
-  onChangeHalfLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
-  halfLongBhValue: string;
-  onChangeHalfLongBh: React.ChangeEventHandler<HTMLInputElement>;
-  shortFhValue: string;
-  onChangeShortFh: React.ChangeEventHandler<HTMLInputElement>;
-  shortMiddleValue: string;
-  onChangeShortMiddle: React.ChangeEventHandler<HTMLInputElement>;
-  shortBhValue: string;
-  onChangeShortBh: React.ChangeEventHandler<HTMLInputElement>;
+  fhRecievesValue: string;
+  fhLongFhValue: string;
+  fhLongMiddleValue: string;
+  fhLongBhValue: string;
+  fhHalfLongFhValue: string;
+  fhHalfLongMiddleValue: string;
+  fhHalfLongBhValue: string;
+  fhShortFhValue: string;
+  fhShortMiddleValue: string;
+  fhShortBhValue: string;
+  onChangeFhRecieves: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhLongFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhLongBh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhHalfLongFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhHalfLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhHalfLongBh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhShortFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhShortMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeFhShortBh: React.ChangeEventHandler<HTMLInputElement>;
+  bhRecievesValue: string;
+  bhLongFhValue: string;
+  bhLongMiddleValue: string;
+  bhLongBhValue: string;
+  bhHalfLongFhValue: string;
+  bhHalfLongMiddleValue: string;
+  bhHalfLongBhValue: string;
+  bhShortFhValue: string;
+  bhShortMiddleValue: string;
+  bhShortBhValue: string;
+  onChangeBhRecieves: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhLongFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhLongBh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhHalfLongFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhHalfLongMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhHalfLongBh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhShortFh: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhShortMiddle: React.ChangeEventHandler<HTMLInputElement>;
+  onChangeBhShortBh: React.ChangeEventHandler<HTMLInputElement>;
   validationValue: boolean;
   validationsValue: string[];
   errorValue: boolean;
@@ -35,35 +55,59 @@ interface RecievesFormProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-export default function RecievesForm({ buttonLabel, recievesValue, onChangeRecieves, longFhValue, onChangeLongFh, longMiddleValue, onChangeLongMiddle, longBhValue, onChangeLongBh, halfLongFhValue, onChangeHalfLongFh, halfLongMiddleValue, onChangeHalfLongMiddle, halfLongBhValue, onChangeHalfLongBh, shortFhValue, onChangeShortFh, shortMiddleValue, onChangeShortMiddle, shortBhValue, onChangeShortBh, validationValue, validationsValue, errorValue, changeValidation, changeError, onSubmit }: RecievesFormProps) {
+export default function RecievesForm({ buttonLabel, fhRecievesValue, onChangeFhRecieves, fhLongFhValue, onChangeFhLongFh, fhLongMiddleValue, onChangeFhLongMiddle, fhLongBhValue, onChangeFhLongBh, fhHalfLongFhValue, onChangeFhHalfLongFh, fhHalfLongMiddleValue, onChangeFhHalfLongMiddle, fhHalfLongBhValue, onChangeFhHalfLongBh, fhShortFhValue, onChangeFhShortFh, fhShortMiddleValue, onChangeFhShortMiddle, fhShortBhValue, onChangeFhShortBh, bhRecievesValue, onChangeBhRecieves, bhLongFhValue, onChangeBhLongFh, bhLongMiddleValue, onChangeBhLongMiddle, bhLongBhValue, onChangeBhLongBh, bhHalfLongFhValue, onChangeBhHalfLongFh, bhHalfLongMiddleValue, onChangeBhHalfLongMiddle, bhHalfLongBhValue, onChangeBhHalfLongBh, bhShortFhValue, onChangeBhShortFh, bhShortMiddleValue, onChangeBhShortMiddle, bhShortBhValue, onChangeBhShortBh, validationValue, validationsValue, errorValue, changeValidation, changeError, onSubmit }: RecievesFormProps) {
 
   return (
     <form className={styles.recievesForm} onSubmit={onSubmit}>
-        <TextField placeholder='Number of recieves' value={recievesValue} onChange={onChangeRecieves} />
-        {recievesValue != '' && <Placements
-            label='Distribute all recieves according to their placement:'
-            longFhValue={longFhValue}
-            longFhOnChange={onChangeLongFh}
-            longMiddleValue={longMiddleValue}
-            longMiddleOnChange={onChangeLongMiddle}
-            longBhValue={longBhValue}
-            longBhOnChange={onChangeLongBh}
-            halfLongFhValue={halfLongFhValue}
-            halfLongFhOnChange={onChangeHalfLongFh}
-            halfLongMiddleValue={halfLongMiddleValue}
-            halfLongMiddleOnChange={onChangeHalfLongMiddle}
-            halfLongBhValue={halfLongBhValue}
-            halfLongBhOnChange={onChangeHalfLongBh}
-            shortFhValue={shortFhValue}
-            shortFhOnChange={onChangeShortFh}
-            shortMiddleValue={shortMiddleValue}
-            shortMiddleOnChange={onChangeShortMiddle}
-            shortBhValue={shortBhValue}
-            shortBhOnChange={onChangeShortBh}
-        />}
-        <Button variant='primary' label={buttonLabel} />
-        <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
-        <Error error={errorValue} setError={changeError} />
+      <label htmlFor='fhServes'>Number of forehand recieves</label>
+      <TextField id='fhRecieves' placeholder='Type here' value={fhRecievesValue} onChange={onChangeFhRecieves} />
+      <label htmlFor='bhRecieves'>Number of backhand recieves</label>
+      <TextField id='bhRecieves' placeholder='Type here' value={bhRecievesValue} onChange={onChangeBhRecieves} />
+      {(fhRecievesValue != '' || fhLongFhValue != '' || fhLongMiddleValue != '' || fhLongBhValue != '' || fhHalfLongFhValue != '' || fhHalfLongMiddleValue != '' || fhHalfLongBhValue != '' || fhShortFhValue != '' || fhShortMiddleValue != '' || fhShortBhValue != '') && <Placements
+        label='Distribute all recieves according to their placement:'
+        longFhValue={fhLongFhValue}
+        longFhOnChange={onChangeFhLongFh}
+        longMiddleValue={fhLongMiddleValue}
+        longMiddleOnChange={onChangeFhLongMiddle}
+        longBhValue={fhLongBhValue}
+        longBhOnChange={onChangeFhLongBh}
+        halfLongFhValue={fhHalfLongFhValue}
+        halfLongFhOnChange={onChangeFhHalfLongFh}
+        halfLongMiddleValue={fhHalfLongMiddleValue}
+        halfLongMiddleOnChange={onChangeFhHalfLongMiddle}
+        halfLongBhValue={fhHalfLongBhValue}
+        halfLongBhOnChange={onChangeFhHalfLongBh}
+        shortFhValue={fhShortFhValue}
+        shortFhOnChange={onChangeFhShortFh}
+        shortMiddleValue={fhShortMiddleValue}
+        shortMiddleOnChange={onChangeFhShortMiddle}
+        shortBhValue={fhShortBhValue}
+        shortBhOnChange={onChangeFhShortBh}
+      />}
+      {(bhRecievesValue != '' || bhLongFhValue != '' || bhLongMiddleValue != '' || bhLongBhValue != '' || bhHalfLongFhValue != '' || bhHalfLongMiddleValue != '' || bhHalfLongBhValue != '' || bhShortFhValue != '' || bhShortMiddleValue != '' || bhShortBhValue != '') && <Placements
+        label='Distribute all backhand recieves according to their placement:'
+        longFhValue={bhLongFhValue}
+        longFhOnChange={onChangeBhLongFh}
+        longMiddleValue={bhLongMiddleValue}
+        longMiddleOnChange={onChangeBhLongMiddle}
+        longBhValue={bhLongBhValue}
+        longBhOnChange={onChangeBhLongBh}
+        halfLongFhValue={bhHalfLongFhValue}
+        halfLongFhOnChange={onChangeBhHalfLongFh}
+        halfLongMiddleValue={bhHalfLongMiddleValue}
+        halfLongMiddleOnChange={onChangeBhHalfLongMiddle}
+        halfLongBhValue={bhHalfLongBhValue}
+        halfLongBhOnChange={onChangeBhHalfLongBh}
+        shortFhValue={bhShortFhValue}
+        shortFhOnChange={onChangeBhShortFh}
+        shortMiddleValue={bhShortMiddleValue}
+        shortMiddleOnChange={onChangeBhShortMiddle}
+        shortBhValue={bhShortBhValue}
+        shortBhOnChange={onChangeBhShortBh}
+      />}
+      <Button variant='primary' label={buttonLabel} />
+      <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
+      <Error error={errorValue} setError={changeError} />
     </form>
   )
 }
