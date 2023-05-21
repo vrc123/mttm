@@ -1,4 +1,4 @@
-import styles from "@/styles/components/SearchField.module.css";
+import styles from "../styles/components/SearchField.module.css";
 
 interface SearchFieldProps {
   placeholder: string;

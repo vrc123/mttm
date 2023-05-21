@@ -203,7 +203,7 @@ export default function AddRecieves() {
 
     return (
         <div className={styles.addRecieves}>
-            <h1>Add forehand recieves</h1>
+            <h1>Add recieves</h1>
             <RecievesForm
                 buttonLabel='Next'
                 fhRecievesValue={fhRecieves}

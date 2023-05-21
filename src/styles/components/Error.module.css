@@ -21,10 +21,19 @@
     border-radius: 10px;
     padding: 25px;
     background-color: #000000; 
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
 }
 
 .error h2 {
     margin-bottom: 25px;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.error p {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .error button {

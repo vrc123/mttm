@@ -96,7 +96,7 @@ export default function AddOpponent() {
 
     return (
         <div className={styles.addOpponent}>
-            <h1>Add an opponent</h1>
+            <h1>Add and select opponent</h1>
             <OpponentForm 
                 buttonLabel='Add opponent'
                 firstNameValue={firstName}

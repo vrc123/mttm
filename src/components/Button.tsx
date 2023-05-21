@@ -1,4 +1,4 @@
-import styles from '@/styles/components/Button.module.css'
+import styles from '../styles/components/Button.module.css'
 
 interface ButtonProps {
   variant: 'primary' | 'secondary' | 'delete',

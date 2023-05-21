@@ -1,4 +1,4 @@
-import styles from "@/styles/components/TextField.module.css";
+import styles from "../styles/components/TextField.module.css";
 
 interface TextFieldProps {
   id: string;

@@ -9,3 +9,7 @@
     font-weight: 400;
     color: #ffffff;
 }
+
+.searchField::-webkit-search-cancel-button{
+    filter: brightness(0) invert(1);
+}

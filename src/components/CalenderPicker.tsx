@@ -1,4 +1,4 @@
-import styles from "@/styles/components/CalenderPicker.module.css";
+import styles from "../styles/components/CalenderPicker.module.css";
 
 interface CalenderPickerProps {
   id: string;
