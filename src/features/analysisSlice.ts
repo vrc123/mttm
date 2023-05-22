@@ -5,16 +5,12 @@ export interface AnalysisState {
     date: string,
     opponentId: number,
     score: string,
-    servesId: number,
-    recievesId: number,
 }
 
 const initialState: AnalysisState = {
     date: '',
     opponentId: 0,
     score: '',
-    servesId: 0,
-    recievesId: 0,
 }
 
 export const analysisSlice = createSlice({
@@ -30,15 +26,9 @@ export const analysisSlice = createSlice({
         saveScore: (state, action: PayloadAction<string>) => {
             state.score = action.payload
         },
-        saveServesId: (state, action: PayloadAction<number>) => {
-            state.servesId = action.payload
-        },
-        saveRecievesId: (state, action: PayloadAction<number>) => {
-            state.recievesId = action.payload
-        },
     },
 })
 
-export const { saveDate, saveOpponentId, saveScore, saveServesId, saveRecievesId } = analysisSlice.actions
+export const { saveDate, saveOpponentId, saveScore } = analysisSlice.actions
 
 export default analysisSlice.reducer

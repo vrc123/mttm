@@ -1,5 +1,5 @@
-describe('template spec', () => {
-  it('passes', () => {
+describe('Test of MTTM', () => {
+  it('Creates an anlysis', () => {
     cy.visit('http://localhost:3000/')
 
     cy.get('h1').should('have.text', 'My table tennis matches')
@@ -13,7 +13,7 @@ describe('template spec', () => {
     cy.get('h1').should('have.text', 'Select your opponent')
     cy.get('a').contains('Click here').click()
     
-    cy.get('h1').should('have.text', 'Add an opponent')
+    cy.get('h1').should('have.text', 'Add and select opponent')
     cy.get('input').its('length').should('eq', 5)
     cy.get('input').eq(0).type('Test')
     cy.get('input').eq(1).type('Test')
@@ -39,6 +39,7 @@ describe('template spec', () => {
     cy.get('h1').should('have.text', 'Add match rallies')
     cy.get('input').its('length').should('eq', 2)
     cy.get('button').contains('Create analysis').click()
+    cy.get('.AnalysisItem_analysisItem__UCTCo')
   })
 
   /*

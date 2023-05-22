@@ -3,9 +3,11 @@ import RalliesForm from '@/components/forms/RalliesForm'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../../store'
-import { saveDate, saveOpponentId, saveRecievesId, saveScore, saveServesId } from '@/features/analysisSlice'
+import { saveDate, saveOpponentId, saveScore } from '@/features/analysisSlice'
 import { useRouter } from 'next/router'
 import { supabase } from '../../../../../supabase-client'
+import { saveBhServes, saveFhServes } from '@/features/servesSlice'
+import { saveBhRecieves, saveFhRecieves } from '@/features/recievesSlice'
 
 export default function AddRallies() {
 
@@ -20,6 +22,8 @@ export default function AddRallies() {
     const [error, setError] = useState(false)
 
     const analysis = useSelector((state: RootState) => state.analysis)
+    const serves = useSelector((state: RootState) => state.serves)
+    const recieves = useSelector((state: RootState) => state.recieves)
 
     const dispatch = useDispatch()
 
@@ -64,64 +68,190 @@ export default function AddRallies() {
 
         if (validationArray.length === 0) {
 
-            const { data: ralliesMore, error } = await supabase
-            .from('ralliesMore')
+            const { data: forehandServes, error } = await supabase
+            .from('forehandServes')
             .insert([{
-                wins: moreWins,
-                loses: moreLoses,
+                longFh: serves.fhServes.longFh,
+                longMiddle: serves.fhServes.longMiddle,
+                longBh: serves.fhServes.longBh,
+                halfLongFh: serves.fhServes.halfLongFh,
+                halfLongMiddle: serves.fhServes.halfLongMiddle,
+                halfLongBh: serves.fhServes.halfLongBh,
+                shortFh: serves.fhServes.shortFh,
+                shortMiddle: serves.fhServes.shortMiddle,
+                shortBh: serves.fhServes.shortBh,
             }]).select('*')
 
-            if (ralliesMore) {
+            if (forehandServes) {
                 
-                const { data: ralliesLess, error } = await supabase
-                .from('ralliesLess')
+                const { data: backhandServes, error } = await supabase
+                .from('backhandServes')
                 .insert([{
-                    wins: lessWins,
-                    loses: lessLoses,
+                    longFh: serves.bhServes.longFh,
+                    longMiddle: serves.bhServes.longMiddle,
+                    longBh: serves.bhServes.longBh,
+                    halfLongFh: serves.bhServes.halfLongFh,
+                    halfLongMiddle: serves.bhServes.halfLongMiddle,
+                    halfLongBh: serves.bhServes.halfLongBh,
+                    shortFh: serves.bhServes.shortFh,
+                    shortMiddle: serves.bhServes.shortMiddle,
+                    shortBh: serves.bhServes.shortBh,
                 }]).select('*')
+        
+                if (backhandServes) {
 
-                if (ralliesLess) {
-
-                    const { data: rallies, error } = await supabase
-                    .from('rallies')
+                    const { data: serves, error } = await supabase
+                    .from('serves')
                     .insert([{
-                        ralliesMoreId: ralliesMore[0].id,
-                        ralliesLessId: ralliesLess[0].id,
+                        fhServesId: forehandServes[0].id,
+                        bhServesId: backhandServes[0].id,
                     }]).select('*')
+        
+                    if (serves) {
 
-                    if (rallies) {
-
-                        const { data: analyses, error } = await supabase
-                        .from('analyses')
+                        const { data: forehandRecieves, error } = await supabase
+                        .from('forehandRecieves')
                         .insert([{
-                            date: analysis.date,
-                            opponentId: analysis.opponentId,
-                            score: analysis.score,
-                            servesId: analysis.servesId,
-                            recievesId: analysis.recievesId,
-                            ralliesId: rallies[0].id,
+                            longFh: recieves.fhRecieves.longFh,
+                            longMiddle: recieves.fhRecieves.longMiddle,
+                            longBh: recieves.fhRecieves.longBh,
+                            halfLongFh: recieves.fhRecieves.halfLongFh,
+                            halfLongMiddle: recieves.fhRecieves.halfLongMiddle,
+                            halfLongBh: recieves.fhRecieves.halfLongBh,
+                            shortFh: recieves.fhRecieves.shortFh,
+                            shortMiddle: recieves.fhRecieves.shortMiddle,
+                            shortBh: recieves.fhRecieves.shortBh,
                         }]).select('*')
 
-                        if (analyses) {
-                            dispatch(saveDate(''))
-                            dispatch(saveOpponentId(0))
-                            dispatch(saveScore(''))
-                            dispatch(saveServesId(0))
-                            dispatch(saveRecievesId(0))
+                        if (forehandRecieves) {
                             
-                            router.push('/my-analyses')
+                            const { data: backhandRecieves, error } = await supabase
+                            .from('backhandRecieves')
+                            .insert([{
+                                longFh: recieves.bhRecieves.longFh,
+                                longMiddle: recieves.bhRecieves.longMiddle,
+                                longBh: recieves.fhRecieves.longBh,
+                                halfLongFh: recieves.bhRecieves.halfLongFh,
+                                halfLongMiddle: recieves.bhRecieves.halfLongMiddle,
+                                halfLongBh: recieves.bhRecieves.halfLongBh,
+                                shortFh: recieves.bhRecieves.shortFh,
+                                shortMiddle: recieves.bhRecieves.shortMiddle,
+                                shortBh: recieves.bhRecieves.shortBh,
+                            }]).select('*')
+
+                            if (backhandRecieves) {
+
+                                const { data: recieves, error } = await supabase
+                                .from('recieves')
+                                .insert([{
+                                    fhRecievesId: forehandRecieves[0].id,
+                                    bhRecievesId: backhandRecieves[0].id,
+                                }]).select('*')
+
+                                if (recieves) {
+
+                                    const { data: ralliesMore, error } = await supabase
+                                    .from('ralliesMore')
+                                    .insert([{
+                                        wins: moreWins,
+                                        loses: moreLoses,
+                                    }]).select('*')
+
+                                    if (ralliesMore) {
+
+                                        const { data: ralliesLess, error } = await supabase
+                                        .from('ralliesLess')
+                                        .insert([{
+                                            wins: lessWins,
+                                            loses: lessLoses,
+                                        }]).select('*')
+
+                                        if (ralliesLess) {
+
+                                            const { data: rallies, error } = await supabase
+                                            .from('rallies')
+                                            .insert([{
+                                                ralliesMoreId: ralliesMore[0].id,
+                                                ralliesLessId: ralliesLess[0].id,
+                                            }]).select('*')
+
+                                            if (rallies) {
+                                                const { data: analyses, error } = await supabase
+                                                .from('analyses')
+                                                .insert([{
+                                                    date: analysis.date,
+                                                    opponentId: analysis.opponentId,
+                                                    score: analysis.score,
+                                                    servesId: serves[0].id,
+                                                    recievesId: recieves[0].id,
+                                                    ralliesId: rallies[0].id,
+                                                }]).select('*')
+
+                                                if (analyses) {
+
+                                                    const placements = {
+                                                        longFh: '',
+                                                        longMiddle: '',
+                                                        longBh: '',
+                                                        halfLongFh: '',
+                                                        halfLongMiddle: '',
+                                                        halfLongBh: '',
+                                                        shortFh: '',
+                                                        shortMiddle: '',
+                                                        shortBh: '',
+                                                    }
+
+                                                    dispatch(saveDate(''))
+                                                    dispatch(saveOpponentId(0))
+                                                    dispatch(saveScore(''))
+                                                    dispatch(saveFhServes(placements))
+                                                    dispatch(saveBhServes(placements))
+                                                    dispatch(saveFhRecieves(placements))
+                                                    dispatch(saveBhRecieves(placements))
+                                                    
+                                                    router.push('/my-analyses')
+                                                }
+
+                                                if (error) {
+                                                    setError(true)
+                                                }
+                                            }
+
+                                            if (error) {
+                                                setError(true)
+                                            }
+                                        }
+
+                                        if (error) {
+                                            setError(true)
+                                        }
+                                    }
+
+                                    if (error) {
+                                        setError(true)
+                                    }
+                                }
+
+                                if (error) {
+                                    setError(true)
+                                }
+                            }
+
+                            if (error) {
+                                setError(true)
+                            }
                         }
 
                         if (error) {
                             setError(true)
                         }
                     }
-
+        
                     if (error) {
                         setError(true)
                     }
                 }
-                
+        
                 if (error) {
                     setError(true)
                 }
@@ -129,7 +259,7 @@ export default function AddRallies() {
 
             if (error) {
                 setError(true)
-            }
+            }            
 
         } else {
             setValidation(true)

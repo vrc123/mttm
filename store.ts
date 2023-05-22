@@ -7,8 +7,6 @@ export const store = configureStore({
   reducer: {
     analysis: analysisReducer,
     serves: servesReducer,
-
-    
     recieves: recievesReducer,
   },
 })

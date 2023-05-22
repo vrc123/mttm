@@ -16,6 +16,10 @@
     margin: 50px 0;
 }
 
+.myAnalyses button {
+    margin-bottom: 25px;
+}
+
 .myAnalyses a {
     color: #ffaa00;
 }

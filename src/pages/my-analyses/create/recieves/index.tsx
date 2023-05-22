@@ -1,11 +1,9 @@
 import styles from '@/styles/pages/AddRecieves.module.css'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { saveFhRecievesId } from '@/features/recievesSlice'
+import { saveFhRecieves, saveBhRecieves } from '@/features/recievesSlice'
 import { useRouter } from 'next/router'
-import { supabase } from '../../../../../supabase-client'
 import RecievesForm from '@/components/forms/RecievesForm'
-import { saveRecievesId } from '@/features/analysisSlice'
 
 export default function AddRecieves() {
 
@@ -137,9 +135,7 @@ export default function AddRecieves() {
 
         if (validationArray.length === 0) {
 
-            const { data: forehandRecieves, error } = await supabase
-            .from('forehandRecieves')
-            .insert([{
+            const fhRecieves = {
                 longFh: fhLongFh,
                 longMiddle: fhLongMiddle,
                 longBh: fhLongBh,
@@ -149,51 +145,24 @@ export default function AddRecieves() {
                 shortFh: fhShortFh,
                 shortMiddle: fhShortMiddle,
                 shortBh: fhShortBh,
-            }]).select('*')
-
-            if (forehandRecieves) {
-                
-                const { data: backhandRecieves, error } = await supabase
-                .from('backhandRecieves')
-                .insert([{
-                    longFh: bhLongFh,
-                    longMiddle: bhLongMiddle,
-                    longBh: bhLongBh,
-                    halfLongFh: bhHalfLongFh,
-                    halfLongMiddle: bhHalfLongMiddle,
-                    halfLongBh: bhHalfLongBh,
-                    shortFh: bhShortFh,
-                    shortMiddle: bhShortMiddle,
-                    shortBh: bhShortBh,
-                }]).select('*')
-    
-                if (backhandRecieves) {
-
-                    const { data: recieves, error } = await supabase
-                    .from('recieves')
-                    .insert([{
-                        fhRecievesId: forehandRecieves[0].id,
-                        bhRecievesId: backhandRecieves[0].id,
-                    }]).select('*')
-        
-                    if (recieves) {
-                        dispatch(saveRecievesId(recieves[0].id))
-                        router.push('/my-analyses/create/rallies')
-                    }
-        
-                    if (error) {
-                        setError(true)
-                    }
-                }
-    
-                if (error) {
-                    setError(true)
-                }
             }
 
-            if (error) {
-                setError(true)
+            const bhRecieves = {
+                longFh: bhLongFh,
+                longMiddle: bhLongMiddle,
+                longBh: bhLongBh,
+                halfLongFh: bhHalfLongFh,
+                halfLongMiddle: bhHalfLongMiddle,
+                halfLongBh: bhHalfLongBh,
+                shortFh: bhShortFh,
+                shortMiddle: bhShortMiddle,
+                shortBh: bhShortBh,
             }
+
+            dispatch(saveFhRecieves(fhRecieves))
+            dispatch(saveBhRecieves(bhRecieves))
+
+            router.push('/my-analyses/create/rallies')
 
         } else {
             setValidation(true)

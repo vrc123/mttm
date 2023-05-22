@@ -1,9 +1,8 @@
 import styles from '@/styles/pages/AddServes.module.css'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { saveServesId } from '@/features/analysisSlice'
+import { saveFhServes, saveBhServes } from '@/features/servesSlice'
 import { useRouter } from 'next/router'
-import { supabase } from '../../../../../supabase-client'
 import ServesForm from '@/components/forms/ServesForm'
 
 export default function AddServes() {
@@ -136,9 +135,7 @@ export default function AddServes() {
 
         if (validationArray.length === 0) {
 
-            const { data: forehandServes, error } = await supabase
-            .from('forehandServes')
-            .insert([{
+            const fhServes = {
                 longFh: fhLongFh,
                 longMiddle: fhLongMiddle,
                 longBh: fhLongBh,
@@ -148,51 +145,24 @@ export default function AddServes() {
                 shortFh: fhShortFh,
                 shortMiddle: fhShortMiddle,
                 shortBh: fhShortBh,
-            }]).select('*')
-
-            if (forehandServes) {
-                
-                const { data: backhandServes, error } = await supabase
-                .from('backhandServes')
-                .insert([{
-                    longFh: bhLongFh,
-                    longMiddle: bhLongMiddle,
-                    longBh: bhLongBh,
-                    halfLongFh: bhHalfLongFh,
-                    halfLongMiddle: bhHalfLongMiddle,
-                    halfLongBh: bhHalfLongBh,
-                    shortFh: bhShortFh,
-                    shortMiddle: bhShortMiddle,
-                    shortBh: bhShortBh,
-                }]).select('*')
-    
-                if (backhandServes) {
-
-                    const { data: serves, error } = await supabase
-                    .from('serves')
-                    .insert([{
-                        fhServesId: forehandServes[0].id,
-                        bhServesId: backhandServes[0].id,
-                    }]).select('*')
-        
-                    if (serves) {
-                        dispatch(saveServesId(serves[0].id))
-                        router.push('/my-analyses/create/recieves')
-                    }
-        
-                    if (error) {
-                        setError(true)
-                    }
-                }
-    
-                if (error) {
-                    setError(true)
-                }
             }
 
-            if (error) {
-                setError(true)
+            const bhServes = {
+                longFh: bhLongFh,
+                longMiddle: bhLongMiddle,
+                longBh: bhLongBh,
+                halfLongFh: bhHalfLongFh,
+                halfLongMiddle: bhHalfLongMiddle,
+                halfLongBh: bhHalfLongBh,
+                shortFh: bhShortFh,
+                shortMiddle: bhShortMiddle,
+                shortBh: bhShortBh,
             }
+
+            dispatch(saveFhServes(fhServes))
+            dispatch(saveBhServes(bhServes))
+
+            router.push('/my-analyses/create/recieves')
 
         } else {
             setValidation(true)

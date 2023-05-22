@@ -1,82 +1,77 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+export interface Serves {
+    longFh: string,
+    longMiddle: string,
+    longBh: string,
+    halfLongFh: string,
+    halfLongMiddle: string,
+    halfLongBh: string,
+    shortFh: string,
+    shortMiddle: string,
+    shortBh: string,
+}
+
 export interface ServesState {
-    fhLongFh: string,
-    fhLongMiddle: string,
-    fhLongBh: string,
-    fhHalfLongFh: string,
-    fhHalfLongMiddle: string,
-    fhHalfLongBh: string,
-    fhShortFh: string,
-    fhShortMiddle: string,
-    fhShortBh: string,
-    bhLongFh: string,
-    bhLongMiddle: string,
-    bhLongBh: string,
-    bhHalfLongFh: string,
-    bhHalfLongMiddle: string,
-    bhHalfLongBh: string,
-    bhShortFh: string,
-    bhShortMiddle: string,
-    bhShortBh: string,
+    fhServes: Serves,
+    bhServes: Serves,
 }
 
 const initialState: ServesState = {
-    fhLongFh: '',
-    fhLongMiddle: '',
-    fhLongBh: '',
-    fhHalfLongFh: '',
-    fhHalfLongMiddle: '',
-    fhHalfLongBh: '',
-    fhShortFh: '',
-    fhShortMiddle: '',
-    fhShortBh: '',
-    bhLongFh: '',
-    bhLongMiddle: '',
-    bhLongBh: '',
-    bhHalfLongFh: '',
-    bhHalfLongMiddle: '',
-    bhHalfLongBh: '',
-    bhShortFh: '',
-    bhShortMiddle: '',
-    bhShortBh: '',
+    fhServes: {
+        longFh: '',
+        longMiddle: '',
+        longBh: '',
+        halfLongFh: '',
+        halfLongMiddle: '',
+        halfLongBh: '',
+        shortFh: '',
+        shortMiddle: '',
+        shortBh: '',
+    },
+    bhServes: {
+        longFh: '',
+        longMiddle: '',
+        longBh: '',
+        halfLongFh: '',
+        halfLongMiddle: '',
+        halfLongBh: '',
+        shortFh: '',
+        shortMiddle: '',
+        shortBh: '',
+    },
 }
 
 export const servesSlice = createSlice({
     name: 'serves',
     initialState,
     reducers: {
-        saveFhLongFh: (state, action: PayloadAction<string>) => {
-            state.fhLongFh = action.payload
+        saveFhServes: (state, action: PayloadAction<Serves>) => {
+            state.fhServes.longFh = action.payload.longFh
+            state.fhServes.longMiddle = action.payload.longMiddle
+            state.fhServes.longBh = action.payload.longBh
+            state.fhServes.halfLongFh = action.payload.halfLongFh
+            state.fhServes.halfLongMiddle = action.payload.halfLongMiddle
+            state.fhServes.halfLongBh = action.payload.halfLongBh
+            state.fhServes.shortFh = action.payload.shortFh
+            state.fhServes.shortMiddle = action.payload.shortFh
+            state.fhServes.shortBh = action.payload.shortFh
         },
-        saveFhLongMiddle: (state, action: PayloadAction<string>) => {
-            state.fhLongMiddle = action.payload
-        },
-        saveFhLongBh: (state, action: PayloadAction<string>) => {
-            state.fhLongBh = action.payload
-        },
-        saveFhHalfLongFh: (state, action: PayloadAction<string>) => {
-            state.fhHalfLongFh = action.payload
-        },
-        saveFhHalfLongMiddle: (state, action: PayloadAction<string>) => {
-            state.fhHalfLongMiddle = action.payload
-        },
-        saveFhHalfLongBh: (state, action: PayloadAction<string>) => {
-            state.fhHalfLongBh = action.payload
-        },
-        saveFhShortFh: (state, action: PayloadAction<string>) => {
-            state.fhShortFh = action.payload
-        },
-        saveFhShortMiddle: (state, action: PayloadAction<string>) => {
-            state.fhShortMiddle = action.payload
-        },
-        saveFhShortBh: (state, action: PayloadAction<string>) => {
-            state.fhShortBh = action.payload
-        },
+        saveBhServes: (state, action: PayloadAction<Serves>) => {
+            state.bhServes.longFh = action.payload.longFh
+            state.bhServes.longMiddle = action.payload.longMiddle
+            state.bhServes.longBh = action.payload.longBh
+            state.bhServes.halfLongFh = action.payload.halfLongFh
+            state.bhServes.halfLongMiddle = action.payload.halfLongMiddle
+            state.bhServes.halfLongBh = action.payload.halfLongBh
+            state.bhServes.shortFh = action.payload.shortFh
+            state.bhServes.shortMiddle = action.payload.shortFh
+            state.bhServes.shortBh = action.payload.shortFh
+        }
     },
 })
 
-export const { saveFhLongFh, saveFhLongMiddle, saveFhLongBh, saveFhHalfLongFh, saveFhHalfLongMiddle, saveFhHalfLongBh, saveFhShortFh, saveFhShortMiddle, saveFhShortBh } = servesSlice.actions
+export const { saveFhServes, saveBhServes } = servesSlice.actions
 
 export default servesSlice.reducer
