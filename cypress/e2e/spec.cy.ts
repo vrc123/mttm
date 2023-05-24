@@ -10,6 +10,7 @@ describe('Test of MTTM', () => {
     cy.get('.OpponentList_opponentList__xp7Ew').contains('.OpponentItem_opponentItem__8xMoL', 'Test Test Test').within(() => {
       cy.get('button').contains('Delete').click()
     })
+
     cy.get('button').contains('Yes').click()
   })
 

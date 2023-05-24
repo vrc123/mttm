@@ -26,8 +26,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
     function openModal() {
         setAnalysisDelete(true)
     }
-
-   
+    
     async function deleteAnalysis() {        
 
         const { data, error } = await supabase
