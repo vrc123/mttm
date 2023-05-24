@@ -1,6 +1,6 @@
 import styles from '@/styles/components/OpponentList.module.css'
-import OpponentItem from './OpponentItem';
 import { useRouter } from 'next/router';
+import OpponentItem from './OpponentItem';
 
 interface Opponent {
     id: number;
