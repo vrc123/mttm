@@ -1,7 +1,18 @@
 .analysisList {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list {
+    display: flex;
     flex-wrap: wrap;
     gap: 20px;
     width: 1260px;
+    margin-bottom: 25px;
+}
+
+.analysisList button {
     margin-bottom: 25px;
 }
