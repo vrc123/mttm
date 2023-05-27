@@ -68,7 +68,7 @@ export default function AddRallies() {
 
         if (validationArray.length === 0) {
 
-            const { data: forehandServes, error } = await supabase
+            const { data: forehandServes, error: fhServesError } = await supabase
             .from('forehandServes')
             .insert([{
                 longFh: serves.fhServes.longFh,
@@ -81,185 +81,146 @@ export default function AddRallies() {
                 shortMiddle: serves.fhServes.shortMiddle,
                 shortBh: serves.fhServes.shortBh,
             }]).select('*')
+            .single()
 
-            if (forehandServes) {
-                
-                const { data: backhandServes, error } = await supabase
-                .from('backhandServes')
+            const { data: backhandServes, error: bhServesError } = await supabase
+            .from('backhandServes')
+            .insert([{
+                longFh: serves.bhServes.longFh,
+                longMiddle: serves.bhServes.longMiddle,
+                longBh: serves.bhServes.longBh,
+                halfLongFh: serves.bhServes.halfLongFh,
+                halfLongMiddle: serves.bhServes.halfLongMiddle,
+                halfLongBh: serves.bhServes.halfLongBh,
+                shortFh: serves.bhServes.shortFh,
+                shortMiddle: serves.bhServes.shortMiddle,
+                shortBh: serves.bhServes.shortBh,
+            }]).select('*')
+            .single()
+
+            const { data: forehandRecieves, error: fhRecievesError } = await supabase
+            .from('forehandRecieves')
+            .insert([{
+                longFh: recieves.fhRecieves.longFh,
+                longMiddle: recieves.fhRecieves.longMiddle,
+                longBh: recieves.fhRecieves.longBh,
+                halfLongFh: recieves.fhRecieves.halfLongFh,
+                halfLongMiddle: recieves.fhRecieves.halfLongMiddle,
+                halfLongBh: recieves.fhRecieves.halfLongBh,
+                shortFh: recieves.fhRecieves.shortFh,
+                shortMiddle: recieves.fhRecieves.shortMiddle,
+                shortBh: recieves.fhRecieves.shortBh,
+            }]).select('*')
+            .single()
+
+            const { data: backhandRecieves, error: bhRecievesError } = await supabase
+            .from('backhandRecieves')
+            .insert([{
+                longFh: recieves.bhRecieves.longFh,
+                longMiddle: recieves.bhRecieves.longMiddle,
+                longBh: recieves.fhRecieves.longBh,
+                halfLongFh: recieves.bhRecieves.halfLongFh,
+                halfLongMiddle: recieves.bhRecieves.halfLongMiddle,
+                halfLongBh: recieves.bhRecieves.halfLongBh,
+                shortFh: recieves.bhRecieves.shortFh,
+                shortMiddle: recieves.bhRecieves.shortMiddle,
+                shortBh: recieves.bhRecieves.shortBh,
+            }]).select('*')
+            .single()
+
+            const { data: ralliesMore, error: moreError } = await supabase
+            .from('ralliesMore')
+            .insert([{
+                wins: moreWins,
+                loses: moreLoses,
+            }]).select('*')
+            .single()
+
+            const { data: ralliesLess, error: lessError } = await supabase
+            .from('ralliesLess')
+            .insert([{
+                wins: lessWins,
+                loses: lessLoses,
+            }]).select('*')
+            .single()
+
+            if(forehandServes && backhandServes && forehandRecieves && backhandRecieves && ralliesMore && ralliesLess) {
+
+                const { data: serves, error: servesError } = await supabase
+                .from('serves')
                 .insert([{
-                    longFh: serves.bhServes.longFh,
-                    longMiddle: serves.bhServes.longMiddle,
-                    longBh: serves.bhServes.longBh,
-                    halfLongFh: serves.bhServes.halfLongFh,
-                    halfLongMiddle: serves.bhServes.halfLongMiddle,
-                    halfLongBh: serves.bhServes.halfLongBh,
-                    shortFh: serves.bhServes.shortFh,
-                    shortMiddle: serves.bhServes.shortMiddle,
-                    shortBh: serves.bhServes.shortBh,
+                    fhServesId: forehandServes.id,
+                    bhServesId: backhandServes.id,
                 }]).select('*')
-        
-                if (backhandServes) {
+                .single()
 
-                    const { data: serves, error } = await supabase
-                    .from('serves')
+                const { data: recieves, error: recievesError } = await supabase
+                .from('recieves')
+                .insert([{
+                    fhRecievesId: forehandRecieves.id,
+                    bhRecievesId: backhandRecieves.id,
+                }]).select('*')
+                .single()
+
+                const { data: rallies, error: ralliesError } = await supabase
+                .from('rallies')
+                .insert([{
+                    ralliesMoreId: ralliesMore.id,
+                    ralliesLessId: ralliesLess.id,
+                }]).select('*')
+                .single()
+
+                if(serves && recieves && rallies) {
+                    
+                    const { error } = await supabase
+                    .from('analyses')
                     .insert([{
-                        fhServesId: forehandServes[0].id,
-                        bhServesId: backhandServes[0].id,
-                    }]).select('*')
-        
-                    if (serves) {
+                        date: analysis.date,
+                        opponentId: analysis.opponentId,
+                        score: analysis.score,
+                        servesId: serves.id,
+                        recievesId: recieves.id,
+                        ralliesId: rallies.id,
+                    }])
 
-                        const { data: forehandRecieves, error } = await supabase
-                        .from('forehandRecieves')
-                        .insert([{
-                            longFh: recieves.fhRecieves.longFh,
-                            longMiddle: recieves.fhRecieves.longMiddle,
-                            longBh: recieves.fhRecieves.longBh,
-                            halfLongFh: recieves.fhRecieves.halfLongFh,
-                            halfLongMiddle: recieves.fhRecieves.halfLongMiddle,
-                            halfLongBh: recieves.fhRecieves.halfLongBh,
-                            shortFh: recieves.fhRecieves.shortFh,
-                            shortMiddle: recieves.fhRecieves.shortMiddle,
-                            shortBh: recieves.fhRecieves.shortBh,
-                        }]).select('*')
+                    if(!error) {
 
-                        if (forehandRecieves) {
-                            
-                            const { data: backhandRecieves, error } = await supabase
-                            .from('backhandRecieves')
-                            .insert([{
-                                longFh: recieves.bhRecieves.longFh,
-                                longMiddle: recieves.bhRecieves.longMiddle,
-                                longBh: recieves.fhRecieves.longBh,
-                                halfLongFh: recieves.bhRecieves.halfLongFh,
-                                halfLongMiddle: recieves.bhRecieves.halfLongMiddle,
-                                halfLongBh: recieves.bhRecieves.halfLongBh,
-                                shortFh: recieves.bhRecieves.shortFh,
-                                shortMiddle: recieves.bhRecieves.shortMiddle,
-                                shortBh: recieves.bhRecieves.shortBh,
-                            }]).select('*')
-
-                            if (backhandRecieves) {
-
-                                const { data: recieves, error } = await supabase
-                                .from('recieves')
-                                .insert([{
-                                    fhRecievesId: forehandRecieves[0].id,
-                                    bhRecievesId: backhandRecieves[0].id,
-                                }]).select('*')
-
-                                if (recieves) {
-
-                                    const { data: ralliesMore, error } = await supabase
-                                    .from('ralliesMore')
-                                    .insert([{
-                                        wins: moreWins,
-                                        loses: moreLoses,
-                                    }]).select('*')
-
-                                    if (ralliesMore) {
-
-                                        const { data: ralliesLess, error } = await supabase
-                                        .from('ralliesLess')
-                                        .insert([{
-                                            wins: lessWins,
-                                            loses: lessLoses,
-                                        }]).select('*')
-
-                                        if (ralliesLess) {
-
-                                            const { data: rallies, error } = await supabase
-                                            .from('rallies')
-                                            .insert([{
-                                                ralliesMoreId: ralliesMore[0].id,
-                                                ralliesLessId: ralliesLess[0].id,
-                                            }]).select('*')
-
-                                            if (rallies) {
-                                                const { data: analyses, error } = await supabase
-                                                .from('analyses')
-                                                .insert([{
-                                                    date: analysis.date,
-                                                    opponentId: analysis.opponentId,
-                                                    score: analysis.score,
-                                                    servesId: serves[0].id,
-                                                    recievesId: recieves[0].id,
-                                                    ralliesId: rallies[0].id,
-                                                }]).select('*')
-
-                                                if (analyses) {
-
-                                                    const placements = {
-                                                        longFh: '',
-                                                        longMiddle: '',
-                                                        longBh: '',
-                                                        halfLongFh: '',
-                                                        halfLongMiddle: '',
-                                                        halfLongBh: '',
-                                                        shortFh: '',
-                                                        shortMiddle: '',
-                                                        shortBh: '',
-                                                    }
-
-                                                    dispatch(saveDate(''))
-                                                    dispatch(saveOpponentId(0))
-                                                    dispatch(saveScore(''))
-                                                    dispatch(saveFhServes(placements))
-                                                    dispatch(saveBhServes(placements))
-                                                    dispatch(saveFhRecieves(placements))
-                                                    dispatch(saveBhRecieves(placements))
-                                                    
-                                                    router.push('/my-analyses')
-                                                }
-
-                                                if (error) {
-                                                    setError(true)
-                                                }
-                                            }
-
-                                            if (error) {
-                                                setError(true)
-                                            }
-                                        }
-
-                                        if (error) {
-                                            setError(true)
-                                        }
-                                    }
-
-                                    if (error) {
-                                        setError(true)
-                                    }
-                                }
-
-                                if (error) {
-                                    setError(true)
-                                }
-                            }
-
-                            if (error) {
-                                setError(true)
-                            }
+                        const placements = {
+                            longFh: '',
+                            longMiddle: '',
+                            longBh: '',
+                            halfLongFh: '',
+                            halfLongMiddle: '',
+                            halfLongBh: '',
+                            shortFh: '',
+                            shortMiddle: '',
+                            shortBh: '',
                         }
 
-                        if (error) {
-                            setError(true)
-                        }
+                        dispatch(saveDate(''))
+                        dispatch(saveOpponentId(0))
+                        dispatch(saveScore(''))
+                        dispatch(saveFhServes(placements))
+                        dispatch(saveBhServes(placements))
+                        dispatch(saveFhRecieves(placements))
+                        dispatch(saveBhRecieves(placements))
+                        
+                        router.push('/my-analyses')
                     }
-        
-                    if (error) {
-                        setError(true)
+
+                    if(error) {
+                        setError(true) 
                     }
                 }
-        
-                if (error) {
-                    setError(true)
+
+                if(servesError || recievesError || ralliesError) {
+                    setError(true) 
                 }
             }
 
-            if (error) {
-                setError(true)
-            }            
+            if(fhServesError || bhServesError || fhRecievesError || bhRecievesError || moreError || lessError) {
+               setError(true) 
+            }           
 
         } else {
             setValidation(true)
