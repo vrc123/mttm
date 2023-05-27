@@ -63,11 +63,14 @@ export default function EditRallies({ analysis }: EditRalliesProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
     
     async function EditRallies(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = []
 
@@ -124,10 +127,12 @@ export default function EditRallies({ analysis }: EditRalliesProps) {
             }
 
             if (moreError || lessError) {
+                setIsLoading(false)
                 setError(true)
             }
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -153,6 +158,7 @@ export default function EditRallies({ analysis }: EditRalliesProps) {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 changeValidation={setValidation}
                 changeError={setError}
                 onSubmit={EditRallies}

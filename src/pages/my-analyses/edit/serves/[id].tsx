@@ -89,11 +89,14 @@ export default function EditForehandServes({ analysis }: EditServesProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     
     const router = useRouter()
     
     async function editServes(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = [];
 
@@ -224,10 +227,12 @@ export default function EditForehandServes({ analysis }: EditServesProps) {
             }
 
             if (fhError || bhError) {
+                setIsLoading(false)
                 setError(true)
             }
             
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -281,6 +286,7 @@ export default function EditForehandServes({ analysis }: EditServesProps) {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 changeValidation={setValidation}
                 changeError={setError}
                 onSubmit={editServes}

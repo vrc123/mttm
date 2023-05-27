@@ -3,21 +3,23 @@ import TextField from "./TextField";
 
 interface OutcomeProps {
   label: string;
+  winsId: string;
   winsValue: string;
   winsOnChange: React.ChangeEventHandler<HTMLInputElement>;
+  losesId: string;
   losesValue: string;
   losesOnChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export default function Outcome({ label, winsValue, winsOnChange, losesValue, losesOnChange }: OutcomeProps) {
+export default function Outcome({ label, winsId, winsValue, winsOnChange, losesId, losesValue, losesOnChange }: OutcomeProps) {
 
   return (
     <div className={styles.outCome}>
       <p>{label}</p>
-      <label htmlFor='wins'>Wins</label>
-      <TextField id='wins' placeholder='Type here' value={winsValue} onChange={winsOnChange} />
-      <label htmlFor='loses'>Loses</label>
-      <TextField id='loses' placeholder='Type here' value={losesValue} onChange={losesOnChange} />
+      <label htmlFor={winsId}>Wins</label>
+      <TextField id={winsId} placeholder='Type here' value={winsValue} onChange={winsOnChange} />
+      <label htmlFor={losesId}>Loses</label>
+      <TextField id={losesId} placeholder='Type here' value={losesValue} onChange={losesOnChange} />
     </div>
   )
 }

@@ -7,10 +7,11 @@ interface DeleteProps {
     setDeleteItem: React.Dispatch<React.SetStateAction<boolean>>;
     error: boolean;
     setError: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoadingValue: boolean;
     deleteFunction: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function Delete({deleteItem, setDeleteItem, error, setError, deleteFunction}: DeleteProps) {
+export default function Delete({deleteItem, setDeleteItem, error, setError, isLoadingValue, deleteFunction}: DeleteProps) {
 
     function closeModal() {
         setError(false)
@@ -21,9 +22,12 @@ export default function Delete({deleteItem, setDeleteItem, error, setError, dele
         <Modal overlayClassName={styles.deleteOverlay} className={styles.delete} isOpen={deleteItem} onRequestClose={closeModal} ariaHideApp={false}>
             {!error && <div>
                 <h2>Delete</h2>
-                <p>Are you sure you want to delete?</p>
-                <Button variant='secondary' label="No" onClick={closeModal} />
-                <Button variant='delete' label="Yes" onClick={deleteFunction} />
+                {!isLoadingValue && <div>
+                    <p>Are you sure you want to delete?</p>
+                    <Button variant='secondary' label="No" onClick={closeModal} />
+                    <Button variant='delete' label="Yes" onClick={deleteFunction} />
+                </div>}
+                {isLoadingValue && <p className={styles.loading}>Loading...</p>}
             </div>}
             {error && <div>
                 <h2>Error</h2>

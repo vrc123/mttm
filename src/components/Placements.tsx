@@ -3,6 +3,15 @@ import TextField from "./TextField";
 
 interface PlacementsProps {
   label: string;
+  longFhId: string;
+  longMiddleId: string;
+  longBhId: string;
+  halfLongFhId: string;
+  halfLongMiddleId: string;
+  halfLongBhId: string;
+  shortFhId: string;
+  shortMiddleId: string;
+  shortBhId: string;
   longFhValue: string;
   longFhOnChange: React.ChangeEventHandler<HTMLInputElement>;
   longMiddleValue: string;
@@ -23,29 +32,29 @@ interface PlacementsProps {
   shortBhOnChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export default function Placemnts({ label, longFhValue, longFhOnChange, longMiddleValue, longMiddleOnChange, longBhValue, longBhOnChange, halfLongFhValue, halfLongFhOnChange, halfLongMiddleValue, halfLongMiddleOnChange, halfLongBhValue, halfLongBhOnChange, shortFhValue, shortFhOnChange, shortMiddleValue, shortMiddleOnChange, shortBhValue, shortBhOnChange }: PlacementsProps) {
+export default function Placemnts({ label, longFhId, longMiddleId, longBhId, halfLongFhId, halfLongMiddleId, halfLongBhId, shortFhId, shortMiddleId, shortBhId, longFhValue, longFhOnChange, longMiddleValue, longMiddleOnChange, longBhValue, longBhOnChange, halfLongFhValue, halfLongFhOnChange, halfLongMiddleValue, halfLongMiddleOnChange, halfLongBhValue, halfLongBhOnChange, shortFhValue, shortFhOnChange, shortMiddleValue, shortMiddleOnChange, shortBhValue, shortBhOnChange }: PlacementsProps) {
 
   return (
     <div className={styles.placements}>
       <p>{label}</p>
-      <label htmlFor='longFh'>Long in forehand</label>
-      <TextField id='longFh' placeholder='Type here' value={longFhValue} onChange={longFhOnChange} />
-      <label htmlFor='longMiddle'>Long in middle</label>
-      <TextField id='longMiddle' placeholder='Type here' value={longMiddleValue} onChange={longMiddleOnChange} />
-      <label htmlFor='longBh'>Long in backhand</label>
-      <TextField id='longBh' placeholder='Type here' value={longBhValue} onChange={longBhOnChange} />
-      <label htmlFor='halfLongFh'>Half long in forehand</label>
-      <TextField id='halfLongFh' placeholder='Type here' value={halfLongFhValue} onChange={halfLongFhOnChange} />
-      <label htmlFor='halfLongMiddle'>Half long in middle</label>
-      <TextField id='halfLongMiddle' placeholder='Type here' value={halfLongMiddleValue} onChange={halfLongMiddleOnChange} />
-      <label htmlFor='halfLongBh'>Half long in backhand</label>
-      <TextField id='halfLongBh' placeholder='Type here' value={halfLongBhValue} onChange={halfLongBhOnChange} />
-      <label htmlFor='shortFh'>Short in forehand</label>
-      <TextField id='shortFh' placeholder='Type here' value={shortFhValue} onChange={shortFhOnChange} />
-      <label htmlFor='shortMiddle'>Short in middle</label>
-      <TextField id='shortMiddle' placeholder='Type here' value={shortMiddleValue} onChange={shortMiddleOnChange} />
-      <label htmlFor='shortBh'>Short in backhand</label>
-      <TextField id='shortBh' placeholder='Type here' value={shortBhValue} onChange={shortBhOnChange} />
+      <label htmlFor={longFhId}>Long in forehand</label>
+      <TextField id={longFhId} placeholder='Type here' value={longFhValue} onChange={longFhOnChange} />
+      <label htmlFor={longMiddleId}>Long in middle</label>
+      <TextField id={longMiddleId} placeholder='Type here' value={longMiddleValue} onChange={longMiddleOnChange} />
+      <label htmlFor={longBhId}>Long in backhand</label>
+      <TextField id={longBhId} placeholder='Type here' value={longBhValue} onChange={longBhOnChange} />
+      <label htmlFor={halfLongFhId}>Half long in forehand</label>
+      <TextField id={halfLongFhId} placeholder='Type here' value={halfLongFhValue} onChange={halfLongFhOnChange} />
+      <label htmlFor={halfLongMiddleId}>Half long in middle</label>
+      <TextField id={halfLongMiddleId} placeholder='Type here' value={halfLongMiddleValue} onChange={halfLongMiddleOnChange} />
+      <label htmlFor={halfLongBhId}>Half long in backhand</label>
+      <TextField id={halfLongBhId} placeholder='Type here' value={halfLongBhValue} onChange={halfLongBhOnChange} />
+      <label htmlFor={shortFhId}>Short in forehand</label>
+      <TextField id={shortFhId} placeholder='Type here' value={shortFhValue} onChange={shortFhOnChange} />
+      <label htmlFor={shortMiddleId}>Short in middle</label>
+      <TextField id={shortMiddleId} placeholder='Type here' value={shortMiddleValue} onChange={shortMiddleOnChange} />
+      <label htmlFor={shortBhId}>Short in backhand</label>
+      <TextField id={shortBhId} placeholder='Type here' value={shortBhValue} onChange={shortBhOnChange} />
     </div>
   )
 }

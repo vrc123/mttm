@@ -57,10 +57,13 @@ export default function SelectOpponent({ data, analysis }: SelectOpponentProps) 
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
 
     async function selectNewOpponent() {
+
+        setIsLoading(true)
 
         let validationArray = [];
 
@@ -81,10 +84,12 @@ export default function SelectOpponent({ data, analysis }: SelectOpponentProps) 
             }
 
             if (error) {
+                setIsLoading(false)
                 setError(true)
             }
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -96,7 +101,8 @@ export default function SelectOpponent({ data, analysis }: SelectOpponentProps) 
                 <h1>Select a new opponent</h1>
                 {data.length != 0 && <SelectOpponentList opponents={data} selectedOpponentValue={opponent} changeOpponent={setOpponent} />}
                 <p>Can't find the right opponent to select? <Link href={'/my-analyses/edit/opponent/add/' + analysis.id}>Click here</Link> to add and select a new opponent.</p>
-                <Button variant='primary' label='Select' onClick={selectNewOpponent} />
+                {!isLoading && <Button variant='primary' label='Select' onClick={selectNewOpponent} />}
+                {isLoading && <p className={styles.loading}>Loading...</p>}
                 <Validation validation={validation} setValidation={setValidation} validations={validations} />
                 <Error error={error} setError={setError} />
             </div>

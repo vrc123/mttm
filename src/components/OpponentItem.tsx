@@ -44,6 +44,7 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
 
     const [opponentDelete, setOpponentDelete] = useState(false)
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
 
@@ -57,6 +58,8 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
    
     async function deleteOpponent() {
 
+        setIsLoading(true)
+
         const { data: analyses, error: analysesError} = await supabase
         .from('analyses')
         .select('*')
@@ -67,7 +70,7 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
             for (let i = 0; i < analyses.length; i++) {
 
                 const { data: analysis, error: analysisError }: AnalysisDeleteProps = await supabase
-                .from('analysess')
+                .from('analyses')
                 .select(`
                     opponentId,
                     serves ( 
@@ -117,34 +120,40 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
                     .from('ralliesLess')
                     .delete()
                     .eq('id', analysis.rallies.ralliesLessId)
-                    
         
                     if (fhServesError || bhServesError || fhRecievesError || bhRecievesError || ralliesMoreError || ralliesLessError) {
+                        setIsLoading(false)
                         setError(true)
                     }
                 }
 
                 if (analysisError) {
+                    setIsLoading(false)
                     setError(true)
                 }
             }
 
-            const { error: opponentsError } = await supabase
-            .from('opponents')
-            .delete()
-            .eq('id', id)
+            if (!error) {
 
-            if (opponentsError) {
-                setError(true)
+                const { error: opponentsError } = await supabase
+                .from('opponents')
+                .delete()
+                .eq('id', id)
+
+                if (!opponentsError) {
+                    router.reload()
+                }
+                
+                if (opponentsError) {
+                    setIsLoading(false)
+                    setError(true)
+                }
             }
         }
         
         if (analysesError) {
+            setIsLoading(false)
             setError(true)
-        }
-
-        if (error == false) {
-            router.reload()
         }
     }
     
@@ -155,7 +164,7 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
             <p>Birthday: {birthday}</p>
             <Button variant='secondary' label='Edit' onClick={editOpponent} />
             <Button variant='delete' label='Delete' onClick={openModal} />
-            <Delete deleteItem={opponentDelete} setDeleteItem={setOpponentDelete} error={error} setError={setError} deleteFunction={deleteOpponent} />
+            <Delete deleteItem={opponentDelete} setDeleteItem={setOpponentDelete} error={error} setError={setError} isLoadingValue={isLoading} deleteFunction={deleteOpponent} />
         </div>
     )
 }

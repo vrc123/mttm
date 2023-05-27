@@ -22,13 +22,14 @@ interface RalliesFormProps {
     validationValue: boolean;
     validationsValue: string[];
     errorValue: boolean;
+    isLoadingValue: boolean;
     changeValidation: React.Dispatch<React.SetStateAction<boolean>>;
     changeError: React.Dispatch<React.SetStateAction<boolean>>;
     onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
 
-export default function RalliesForm({ buttonLabel, moreValue, lessValue, moreWinsValue, moreLosesValue, lessWinsValue, lessLosesValue, onChangeMore, onChangeLess, onChangeMoreWins, onChangeMoreLoses, onChangeLessWins, onChangeLessLoses, validationValue, validationsValue, errorValue, changeValidation, changeError, onSubmit }: RalliesFormProps) {
+export default function RalliesForm({ buttonLabel, moreValue, lessValue, moreWinsValue, moreLosesValue, lessWinsValue, lessLosesValue, onChangeMore, onChangeLess, onChangeMoreWins, onChangeMoreLoses, onChangeLessWins, onChangeLessLoses, validationValue, validationsValue, errorValue, isLoadingValue, changeValidation, changeError, onSubmit }: RalliesFormProps) {
 
   return (
     <form className={styles.ralliesForm} onSubmit={onSubmit}>
@@ -36,9 +37,10 @@ export default function RalliesForm({ buttonLabel, moreValue, lessValue, moreWin
       <TextField id='more' placeholder='Type here' value={moreValue} onChange={onChangeMore} />
       <label htmlFor='less'>Less than 3 balls</label>
       <TextField id='less' placeholder='Type here' value={lessValue} onChange={onChangeLess} />
-      {(moreValue != '' || moreWinsValue != '' || moreLosesValue != '') && <Outcome label='Distribute wins and loses for rallies more than 3 balls:' winsValue={moreWinsValue} winsOnChange={onChangeMoreWins} losesValue={moreLosesValue} losesOnChange={onChangeMoreLoses} />}
-      {(lessValue != '' || lessWinsValue != '' || lessLosesValue != '') && <Outcome label='Distribute wins and loses for rallies less than 3 balls:' winsValue={lessWinsValue} winsOnChange={onChangeLessWins} losesValue={lessLosesValue} losesOnChange={onChangeLessLoses} />}
-      <Button variant='primary' label={buttonLabel} />
+      {(moreValue != '' || moreWinsValue != '' || moreLosesValue != '') && <Outcome label='Distribute wins and loses for rallies more than 3 balls:' winsId='moreWins' winsValue={moreWinsValue} winsOnChange={onChangeMoreWins} losesId='moreLoses' losesValue={moreLosesValue} losesOnChange={onChangeMoreLoses} />}
+      {(lessValue != '' || lessWinsValue != '' || lessLosesValue != '') && <Outcome label='Distribute wins and loses for rallies less than 3 balls:' winsId='lessWins' winsValue={lessWinsValue} winsOnChange={onChangeLessWins} losesId='lessLoses' losesValue={lessLosesValue} losesOnChange={onChangeLessLoses} />}
+      {!isLoadingValue && <Button variant='primary' label={buttonLabel} />}
+      {isLoadingValue && <p className={styles.loading}>Loading...</p>}
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
       <Error error={errorValue} setError={changeError} />
     </form>

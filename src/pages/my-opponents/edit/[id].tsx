@@ -41,11 +41,14 @@ export default function EditOpponent({ opponent }: EditOpponentProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
     
     async function editOpponent(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = []
         
@@ -106,10 +109,12 @@ export default function EditOpponent({ opponent }: EditOpponentProps) {
             }
 
             if (error) {
+                setIsLoading(false)
                 setError(true)
             }
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -128,6 +133,7 @@ export default function EditOpponent({ opponent }: EditOpponentProps) {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 onChangeFirstName={(e) => setFirstName(e.target.value)}
                 onChangeMiddleName={(e) => setMiddleName(e.target.value)}
                 onChangeLastName={(e) => setLastName(e.target.value)}

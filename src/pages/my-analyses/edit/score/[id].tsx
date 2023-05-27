@@ -40,11 +40,14 @@ export default function EditDate({ analysis }: EditDateProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter();
 
     async function editScore(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = []
 
@@ -89,10 +92,12 @@ export default function EditDate({ analysis }: EditDateProps) {
             }
 
             if (error) {
+                setIsLoading(false)
                 setError(true)
             }
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -107,6 +112,7 @@ export default function EditDate({ analysis }: EditDateProps) {
                 opponentSetsValue={opponentSets}
                 validationValue={validation}
                 validationsValue={validations}
+                isLoadingValue={isLoading}
                 onChangePlayerSets={(e) => setPlayerSets(e.target.value)}
                 onChangeOpponentSets={(e) => setOpponentSets(e.target.value)}
                 changeValidation={setValidation}

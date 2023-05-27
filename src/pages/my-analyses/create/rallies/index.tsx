@@ -20,6 +20,7 @@ export default function AddRallies() {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const analysis = useSelector((state: RootState) => state.analysis)
     const serves = useSelector((state: RootState) => state.serves)
@@ -31,6 +32,8 @@ export default function AddRallies() {
     
     async function addRallies(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = []
 
@@ -209,20 +212,24 @@ export default function AddRallies() {
                     }
 
                     if(error) {
+                        setIsLoading(false)
                         setError(true) 
                     }
                 }
 
                 if(servesError || recievesError || ralliesError) {
+                    setIsLoading(false)
                     setError(true) 
                 }
             }
 
             if(fhServesError || bhServesError || fhRecievesError || bhRecievesError || moreError || lessError) {
-               setError(true) 
+                setIsLoading(false)
+                setError(true) 
             }           
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -248,6 +255,7 @@ export default function AddRallies() {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 changeValidation={setValidation}
                 changeError={setError}
                 onSubmit={addRallies}

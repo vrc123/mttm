@@ -45,11 +45,14 @@ export default function AddOpponent({ analysis }: AddOpponentProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
 
     async function addOpponent(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
     
         let validationArray = []
         
@@ -119,15 +122,18 @@ export default function AddOpponent({ analysis }: AddOpponentProps) {
                 }
     
                 if (error) {
+                    setIsLoading(false)
                     setError(true)
                 }
             }
     
             if (error) {
+                setIsLoading(false)
                 setError(true)
             }
     
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -146,6 +152,7 @@ export default function AddOpponent({ analysis }: AddOpponentProps) {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 onChangeFirstName={(e) => setFirstName(e.target.value)}
                 onChangeMiddleName={(e) => setMiddleName(e.target.value)}
                 onChangeLastName={(e) => setLastName(e.target.value)}

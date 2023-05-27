@@ -9,6 +9,6 @@ interface SearchFieldProps {
 export default function SearchField({ placeholder, value, onChange }: SearchFieldProps) {
 
   return (
-    <input className={styles.searchField} placeholder={placeholder} value={value} onChange={onChange} type='search' />
+    <input id='search' className={styles.searchField} placeholder={placeholder} value={value} onChange={onChange} type='search' />
   )
 }

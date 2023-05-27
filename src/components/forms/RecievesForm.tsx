@@ -50,21 +50,31 @@ interface RecievesFormProps {
   validationValue: boolean;
   validationsValue: string[];
   errorValue: boolean;
+  isLoadingValue: boolean;
   changeValidation: React.Dispatch<React.SetStateAction<boolean>>;
   changeError: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-export default function RecievesForm({ buttonLabel, fhRecievesValue, onChangeFhRecieves, fhLongFhValue, onChangeFhLongFh, fhLongMiddleValue, onChangeFhLongMiddle, fhLongBhValue, onChangeFhLongBh, fhHalfLongFhValue, onChangeFhHalfLongFh, fhHalfLongMiddleValue, onChangeFhHalfLongMiddle, fhHalfLongBhValue, onChangeFhHalfLongBh, fhShortFhValue, onChangeFhShortFh, fhShortMiddleValue, onChangeFhShortMiddle, fhShortBhValue, onChangeFhShortBh, bhRecievesValue, onChangeBhRecieves, bhLongFhValue, onChangeBhLongFh, bhLongMiddleValue, onChangeBhLongMiddle, bhLongBhValue, onChangeBhLongBh, bhHalfLongFhValue, onChangeBhHalfLongFh, bhHalfLongMiddleValue, onChangeBhHalfLongMiddle, bhHalfLongBhValue, onChangeBhHalfLongBh, bhShortFhValue, onChangeBhShortFh, bhShortMiddleValue, onChangeBhShortMiddle, bhShortBhValue, onChangeBhShortBh, validationValue, validationsValue, errorValue, changeValidation, changeError, onSubmit }: RecievesFormProps) {
+export default function RecievesForm({ buttonLabel, fhRecievesValue, onChangeFhRecieves, fhLongFhValue, onChangeFhLongFh, fhLongMiddleValue, onChangeFhLongMiddle, fhLongBhValue, onChangeFhLongBh, fhHalfLongFhValue, onChangeFhHalfLongFh, fhHalfLongMiddleValue, onChangeFhHalfLongMiddle, fhHalfLongBhValue, onChangeFhHalfLongBh, fhShortFhValue, onChangeFhShortFh, fhShortMiddleValue, onChangeFhShortMiddle, fhShortBhValue, onChangeFhShortBh, bhRecievesValue, onChangeBhRecieves, bhLongFhValue, onChangeBhLongFh, bhLongMiddleValue, onChangeBhLongMiddle, bhLongBhValue, onChangeBhLongBh, bhHalfLongFhValue, onChangeBhHalfLongFh, bhHalfLongMiddleValue, onChangeBhHalfLongMiddle, bhHalfLongBhValue, onChangeBhHalfLongBh, bhShortFhValue, onChangeBhShortFh, bhShortMiddleValue, onChangeBhShortMiddle, bhShortBhValue, onChangeBhShortBh, validationValue, validationsValue, errorValue, isLoadingValue, changeValidation, changeError, onSubmit }: RecievesFormProps) {
 
   return (
     <form className={styles.recievesForm} onSubmit={onSubmit}>
-      <label htmlFor='fhServes'>Number of forehand recieves</label>
+      <label htmlFor='fhRecieves'>Number of forehand recieves</label>
       <TextField id='fhRecieves' placeholder='Type here' value={fhRecievesValue} onChange={onChangeFhRecieves} />
       <label htmlFor='bhRecieves'>Number of backhand recieves</label>
       <TextField id='bhRecieves' placeholder='Type here' value={bhRecievesValue} onChange={onChangeBhRecieves} />
       {(fhRecievesValue != '' || fhLongFhValue != '' || fhLongMiddleValue != '' || fhLongBhValue != '' || fhHalfLongFhValue != '' || fhHalfLongMiddleValue != '' || fhHalfLongBhValue != '' || fhShortFhValue != '' || fhShortMiddleValue != '' || fhShortBhValue != '') && <Placements
         label='Distribute all recieves according to their placement:'
+        longFhId='fhLongFhId'
+        longMiddleId='fhLongMiddleId'
+        longBhId='fhLongBhId'
+        halfLongFhId='fhHalfLongFhId'
+        halfLongMiddleId='fhHalfLongMiddleId'
+        halfLongBhId='fhHalfLongBhId'
+        shortFhId='fhShortFhId'
+        shortMiddleId='fhShortMiddleId'
+        shortBhId='fhShortBhId'
         longFhValue={fhLongFhValue}
         longFhOnChange={onChangeFhLongFh}
         longMiddleValue={fhLongMiddleValue}
@@ -86,6 +96,15 @@ export default function RecievesForm({ buttonLabel, fhRecievesValue, onChangeFhR
       />}
       {(bhRecievesValue != '' || bhLongFhValue != '' || bhLongMiddleValue != '' || bhLongBhValue != '' || bhHalfLongFhValue != '' || bhHalfLongMiddleValue != '' || bhHalfLongBhValue != '' || bhShortFhValue != '' || bhShortMiddleValue != '' || bhShortBhValue != '') && <Placements
         label='Distribute all backhand recieves according to their placement:'
+        longFhId='bhLongFhId'
+        longMiddleId='bhLongMiddleId'
+        longBhId='bhLongBhId'
+        halfLongFhId='bhHalfLongFhId'
+        halfLongMiddleId='bhHalfLongMiddleId'
+        halfLongBhId='bhHalfLongBhId'
+        shortFhId='bhShortFhId'
+        shortMiddleId='bhShortMiddleId'
+        shortBhId='bhShortBhId'
         longFhValue={bhLongFhValue}
         longFhOnChange={onChangeBhLongFh}
         longMiddleValue={bhLongMiddleValue}
@@ -105,7 +124,8 @@ export default function RecievesForm({ buttonLabel, fhRecievesValue, onChangeFhR
         shortBhValue={bhShortBhValue}
         shortBhOnChange={onChangeBhShortBh}
       />}
-      <Button variant='primary' label={buttonLabel} />
+      {!isLoadingValue && <Button variant='primary' label={buttonLabel} />}
+      {isLoadingValue && <p className={styles.loading}>Loading...</p>}
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
       <Error error={errorValue} setError={changeError} />
     </form>

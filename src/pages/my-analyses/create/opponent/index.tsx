@@ -36,12 +36,15 @@ export default function SelectOpponent({ data }: Opponents) {
     const [opponent, setOpponent] = useState(0)
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
 
     const router = useRouter()
 
     function next() {
+
+        setIsLoading(true)
 
         let validationArray = [];
 
@@ -53,6 +56,7 @@ export default function SelectOpponent({ data }: Opponents) {
             dispatch(saveOpponentId(opponent))
             router.push("/my-analyses/create/score")
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -64,7 +68,8 @@ export default function SelectOpponent({ data }: Opponents) {
                 <h1>Select your opponent</h1>
                 {data.length != 0 && <SelectOpponentList opponents={data} selectedOpponentValue={opponent} changeOpponent={setOpponent} />}
                 <p>Can't find the right opponent to select? <Link href='/my-analyses/create/opponent/add'>Click here</Link> to add a new opponent.</p>
-                <Button variant='primary' label='Next' onClick={next} />
+                {!isLoading && <Button variant='primary' label='Next' onClick={next} />}
+                {isLoading && <p className={styles.loading}>Loading...</p>}
                 <Validation validation={validation} setValidation={setValidation} validations={validations} />
             </div>
         </>

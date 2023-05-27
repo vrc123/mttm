@@ -10,6 +10,7 @@ export default function CreateAnalysis() {
     const [date, setDate] = useState('')
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
   
@@ -17,6 +18,8 @@ export default function CreateAnalysis() {
   
     function addDate(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
   
         let validationArray = []
   
@@ -28,8 +31,9 @@ export default function CreateAnalysis() {
             dispatch(saveDate(date))
             router.push('/my-analyses/create/opponent')
         } else {
-          setValidation(true)
-          setValidations(validationArray)
+            setIsLoading(false)
+            setValidation(true)
+            setValidations(validationArray)
         }
     }
 
@@ -41,6 +45,7 @@ export default function CreateAnalysis() {
                 dateValue={date}
                 validationValue={validation}
                 validationsValue={validations}
+                isLoadingValue={isLoading}
                 onChangeDate={(e) => setDate(e.target.value)}
                 changeValidation={setValidation}
                 onSubmit={addDate} 

@@ -50,12 +50,13 @@ interface ServesFormProps {
   validationValue: boolean;
   validationsValue: string[];
   errorValue: boolean;
+  isLoadingValue: boolean;
   changeValidation: React.Dispatch<React.SetStateAction<boolean>>;
   changeError: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 }  
 
-export default function ServesForm({ buttonLabel, fhServesValue, onChangeFhServes, fhLongFhValue, onChangeFhLongFh, fhLongMiddleValue, onChangeFhLongMiddle, fhLongBhValue, onChangeFhLongBh, fhHalfLongFhValue, onChangeFhHalfLongFh, fhHalfLongMiddleValue, onChangeFhHalfLongMiddle, fhHalfLongBhValue, onChangeFhHalfLongBh, fhShortFhValue, onChangeFhShortFh, fhShortMiddleValue, onChangeFhShortMiddle, fhShortBhValue, onChangeFhShortBh, bhServesValue, onChangeBhServes, bhLongFhValue, onChangeBhLongFh, bhLongMiddleValue, onChangeBhLongMiddle, bhLongBhValue, onChangeBhLongBh, bhHalfLongFhValue, onChangeBhHalfLongFh, bhHalfLongMiddleValue, onChangeBhHalfLongMiddle, bhHalfLongBhValue, onChangeBhHalfLongBh, bhShortFhValue, onChangeBhShortFh, bhShortMiddleValue, onChangeBhShortMiddle, bhShortBhValue, onChangeBhShortBh, validationValue, validationsValue, errorValue, changeValidation, changeError, onSubmit }: ServesFormProps) {
+export default function ServesForm({ buttonLabel, fhServesValue, onChangeFhServes, fhLongFhValue, onChangeFhLongFh, fhLongMiddleValue, onChangeFhLongMiddle, fhLongBhValue, onChangeFhLongBh, fhHalfLongFhValue, onChangeFhHalfLongFh, fhHalfLongMiddleValue, onChangeFhHalfLongMiddle, fhHalfLongBhValue, onChangeFhHalfLongBh, fhShortFhValue, onChangeFhShortFh, fhShortMiddleValue, onChangeFhShortMiddle, fhShortBhValue, onChangeFhShortBh, bhServesValue, onChangeBhServes, bhLongFhValue, onChangeBhLongFh, bhLongMiddleValue, onChangeBhLongMiddle, bhLongBhValue, onChangeBhLongBh, bhHalfLongFhValue, onChangeBhHalfLongFh, bhHalfLongMiddleValue, onChangeBhHalfLongMiddle, bhHalfLongBhValue, onChangeBhHalfLongBh, bhShortFhValue, onChangeBhShortFh, bhShortMiddleValue, onChangeBhShortMiddle, bhShortBhValue, onChangeBhShortBh, validationValue, validationsValue, errorValue, isLoadingValue, changeValidation, changeError, onSubmit }: ServesFormProps) {
 
   return (
     <form className={styles.servesForm} onSubmit={onSubmit}>
@@ -65,6 +66,15 @@ export default function ServesForm({ buttonLabel, fhServesValue, onChangeFhServe
       <TextField id='bhServes' placeholder='Type here' value={bhServesValue} onChange={onChangeBhServes} />
       {(fhServesValue != '' || fhLongFhValue != '' || fhLongMiddleValue != '' || fhLongBhValue != '' || fhHalfLongFhValue != '' || fhHalfLongMiddleValue != '' || fhHalfLongBhValue != '' || fhShortFhValue != '' || fhShortMiddleValue != '' || fhShortBhValue != '') && <Placements
         label='Distribute all forhand serves according to their placement:'
+        longFhId='fhLongFhId'
+        longMiddleId='fhLongMiddleId'
+        longBhId='fhLongBhId'
+        halfLongFhId='fhHalfLongFhId'
+        halfLongMiddleId='fhHalfLongMiddleId'
+        halfLongBhId='fhHalfLongBhId'
+        shortFhId='fhShortFhId'
+        shortMiddleId='fhShortMiddleId'
+        shortBhId='fhShortBhId'
         longFhValue={fhLongFhValue}
         longFhOnChange={onChangeFhLongFh}
         longMiddleValue={fhLongMiddleValue}
@@ -86,6 +96,15 @@ export default function ServesForm({ buttonLabel, fhServesValue, onChangeFhServe
       />}
       {(bhServesValue != '' || bhLongFhValue != '' || bhLongMiddleValue != '' || bhLongBhValue != '' || bhHalfLongFhValue != '' || bhHalfLongMiddleValue != '' || bhHalfLongBhValue != '' || bhShortFhValue != '' || bhShortMiddleValue != '' || bhShortBhValue != '') && <Placements
         label='Distribute all backhand serves according to their placement:'
+        longFhId='bhLongFhId'
+        longMiddleId='bhLongMiddleId'
+        longBhId='bhLongBhId'
+        halfLongFhId='bhHalfLongFhId'
+        halfLongMiddleId='bhHalfLongMiddleId'
+        halfLongBhId='bhHalfLongBhId'
+        shortFhId='bhShortFhId'
+        shortMiddleId='bhShortMiddleId'
+        shortBhId='bhShortBhId'
         longFhValue={bhLongFhValue}
         longFhOnChange={onChangeBhLongFh}
         longMiddleValue={bhLongMiddleValue}
@@ -105,7 +124,8 @@ export default function ServesForm({ buttonLabel, fhServesValue, onChangeFhServe
         shortBhValue={bhShortBhValue}
         shortBhOnChange={onChangeBhShortBh}
       />}
-      <Button variant='primary' label={buttonLabel} />
+      {!isLoadingValue && <Button variant='primary' label={buttonLabel} />}
+      {isLoadingValue && <p className={styles.loading}>Loading...</p>}
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
       <Error error={errorValue} setError={changeError} />
     </form>

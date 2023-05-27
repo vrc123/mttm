@@ -30,6 +30,7 @@ export default function AddRecieves() {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -38,6 +39,7 @@ export default function AddRecieves() {
     async function addRecieves(e: { preventDefault: () => void }) {
         e.preventDefault()
 
+        setIsLoading(true)
         
         let validationArray = [];
 
@@ -165,10 +167,11 @@ export default function AddRecieves() {
             router.push('/my-analyses/create/rallies')
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
-  }
+    }
 
     return (
         <div className={styles.addRecieves}>
@@ -218,6 +221,7 @@ export default function AddRecieves() {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 changeValidation={setValidation}
                 changeError={setError}
                 onSubmit={addRecieves}

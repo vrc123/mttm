@@ -45,6 +45,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
 
     const [analysisDelete, setAnalysisDelete] = useState(false)
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const router = useRouter()
 
@@ -53,6 +54,8 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
     }
     
     async function deleteAnalysis() {        
+
+        setIsLoading(true)
 
         const { data: analysis, error: analysisError }: AnalysisDeleteProps = await supabase
         .from('analyses')
@@ -106,14 +109,18 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
             .delete()
             .eq('id', analysis.rallies.ralliesLessId)
 
-            if (fhServesError || bhServesError || fhRecievesError || bhRecievesError || ralliesMoreError || ralliesLessError) {
-                setError(true)
-            } else {
+            if (!fhServesError && !bhServesError && !fhRecievesError && !bhRecievesError && !ralliesMoreError && !ralliesLessError) {
                 router.reload()
+            }
+
+            if (fhServesError || bhServesError || fhRecievesError || bhRecievesError || ralliesMoreError || ralliesLessError) {
+                setIsLoading(false)
+                setError(true)
             }
         }
 
         if (analysisError) {
+            setIsLoading(false)
             setError(true)
         }
     }
@@ -126,7 +133,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
             <p>Date: {date}</p>
             <Button variant='secondary' label='Show' onClick={onClick} />
             <Button variant='delete' label='Delete' onClick={openModal} />
-            <Delete deleteItem={analysisDelete} setDeleteItem={setAnalysisDelete} error={error} setError={setError} deleteFunction={deleteAnalysis} />
+            <Delete deleteItem={analysisDelete} setDeleteItem={setAnalysisDelete} error={error} setError={setError} isLoadingValue={isLoading} deleteFunction={deleteAnalysis} />
         </div>
     )
 }

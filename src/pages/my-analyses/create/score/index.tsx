@@ -11,6 +11,7 @@ export default function AddScore() {
     const [opponentSets, setOpponentSets] = useState('')
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -18,6 +19,8 @@ export default function AddScore() {
 
     function addScore(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
 
         let validationArray = []
 
@@ -55,6 +58,7 @@ export default function AddScore() {
             dispatch(saveScore(playerSets + '/' + opponentSets))
             router.push('/my-analyses/create/serves')
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -69,6 +73,7 @@ export default function AddScore() {
                 opponentSetsValue={opponentSets}
                 validationValue={validation}
                 validationsValue={validations}
+                isLoadingValue={isLoading}
                 onChangePlayerSets={(e) => setPlayerSets(e.target.value)}
                 onChangeOpponentSets={(e) => setOpponentSets(e.target.value)}
                 changeValidation={setValidation}

@@ -15,3 +15,8 @@
 .ralliesForm button {
     margin-top: 50px;
 }
+
+.loading {
+    margin-top: 25px;
+    text-align: center;
+}

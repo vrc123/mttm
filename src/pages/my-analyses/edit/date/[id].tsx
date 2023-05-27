@@ -37,11 +37,14 @@ export default function EditDate({ analysis }: EditDateProps) {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
   
     const router = useRouter()
   
     async function editDate(e: { preventDefault: () => void }) {
         e.preventDefault()
+
+        setIsLoading(true)
   
         let validationArray = []
   
@@ -62,12 +65,14 @@ export default function EditDate({ analysis }: EditDateProps) {
             }
 
             if (error) {
+                setIsLoading(false)
                 setError(true)
             }
 
         } else {
-          setValidation(true)
-          setValidations(validationArray)
+            setIsLoading(false)
+            setValidation(true)
+            setValidations(validationArray)
         }
     }
 
@@ -79,6 +84,7 @@ export default function EditDate({ analysis }: EditDateProps) {
                 dateValue={date}
                 validationValue={validation}
                 validationsValue={validations}
+                isLoadingValue={isLoading}
                 onChangeDate={(e) => setDate(e.target.value)}
                 changeValidation={setValidation}
                 onSubmit={editDate} 

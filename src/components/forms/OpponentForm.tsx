@@ -15,6 +15,7 @@ interface OpponentFormProps {
   validationValue: boolean;
   validationsValue: string[];
   errorValue: boolean;
+  isLoadingValue: boolean;
   onChangeFirstName: React.ChangeEventHandler<HTMLInputElement>;
   onChangeMiddleName: React.ChangeEventHandler<HTMLInputElement>;
   onChangeLastName: React.ChangeEventHandler<HTMLInputElement>;
@@ -25,7 +26,7 @@ interface OpponentFormProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-export default function OpponentForm({ buttonLabel, firstNameValue, middleNameValue, lastNameValue, countryValue, birthdayValue, validationValue, validationsValue, errorValue, onChangeFirstName, onChangeMiddleName, onChangeLastName, onChangeCountry, onChangeBirthday, changeValidation, changeError, onSubmit }: OpponentFormProps) {
+export default function OpponentForm({ buttonLabel, firstNameValue, middleNameValue, lastNameValue, countryValue, birthdayValue, validationValue, validationsValue, errorValue, isLoadingValue, onChangeFirstName, onChangeMiddleName, onChangeLastName, onChangeCountry, onChangeBirthday, changeValidation, changeError, onSubmit }: OpponentFormProps) {
 
   return (
     <form className={styles.opponentForm} onSubmit={onSubmit}>
@@ -35,11 +36,12 @@ export default function OpponentForm({ buttonLabel, firstNameValue, middleNameVa
       <TextField id='middleName' placeholder='Type here' value={middleNameValue} onChange={onChangeMiddleName} />
       <label htmlFor='lastName'>Last name*</label>
       <TextField id='lastName' placeholder='Type here' value={lastNameValue} onChange={onChangeLastName} />
-      <label htmlFor='country'>Country*</label>
-      <TextField id='country' placeholder='Type here' value={countryValue} onChange={onChangeCountry} />
+      <label htmlFor='opponentCountry'>Country*</label>
+      <TextField id='opponentCountry' placeholder='Type here' value={countryValue} onChange={onChangeCountry} />
       <label htmlFor='birthday'>Birthday*</label>
       <CalenderPicker id='birthday' value={birthdayValue} onChange={onChangeBirthday} />
-      <Button variant='primary' label={buttonLabel} />
+      {!isLoadingValue && <Button variant='primary' label={buttonLabel} />}
+      {isLoadingValue && <p className={styles.loading}>Loading...</p>}
       <Validation validation={validationValue} setValidation={changeValidation} validations={validationsValue} />
       <Error error={errorValue} setError={changeError} />
     </form>

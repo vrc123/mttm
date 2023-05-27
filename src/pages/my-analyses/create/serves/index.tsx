@@ -30,6 +30,7 @@ export default function AddServes() {
     const [validation, setValidation] = useState(false)
     const [validations, setValidations] = useState<string[]>([])
     const [error, setError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -38,7 +39,8 @@ export default function AddServes() {
     async function addServes(e: { preventDefault: () => void }) {
         e.preventDefault()
 
-        
+        setIsLoading(true)
+
         let validationArray = [];
 
         if (isNaN(Number(fhServes))) {
@@ -165,6 +167,7 @@ export default function AddServes() {
             router.push('/my-analyses/create/recieves')
 
         } else {
+            setIsLoading(false)
             setValidation(true)
             setValidations(validationArray)
         }
@@ -218,6 +221,7 @@ export default function AddServes() {
                 validationValue={validation}
                 validationsValue={validations}
                 errorValue={error}
+                isLoadingValue={isLoading}
                 changeValidation={setValidation}
                 changeError={setError}
                 onSubmit={addServes}
