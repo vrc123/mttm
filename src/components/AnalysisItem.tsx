@@ -16,6 +16,25 @@ interface AnalysisItemProps {
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+interface Analysis {
+    serves: {
+        fhServesId: number;
+        bhServesId: number;
+    },
+    recieves: {
+        fhRecievesId: number;
+        bhRecievesId: number;
+    },
+    rallies: {
+        ralliesMoreId: number;
+        ralliesLessId: number;
+    }
+}
+
+interface AnalysisDeleteProps {
+    data: Analysis | null
+}
+
 export default function AnalysisItem({ id, firstName, middleName, lastName, country, score, date, onClick }: AnalysisItemProps) {
 
     const [analysisDelete, setAnalysisDelete] = useState(false)
@@ -29,14 +48,63 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
     
     async function deleteAnalysis() {        
 
-        const { data, error } = await supabase
+        const { data: analysis}: AnalysisDeleteProps = await supabase
         .from('analyses')
         .delete()
         .eq('id', id)
-        .select('*')
+        .select(`
+            serves ( 
+                fhServesId,
+                bhServesId
+            ),
+            recieves ( 
+                fhRecievesId,
+                bhRecievesId
+            ),
+            rallies ( 
+                ralliesMoreId,
+                ralliesLessId
+            )
+        `)
+        .single()
 
-        if (data) {
-            router.reload()
+        if (analysis != null) {
+
+            const { error: fhServesError } = await supabase
+            .from('forehandServes')
+            .delete()
+            .eq('id', analysis.serves.fhServesId)
+            
+            const { error: bhServesError } = await supabase
+            .from('backhandServes')
+            .delete()
+            .eq('id', analysis.serves.bhServesId)
+
+            const { error: fhRecievesError } = await supabase
+            .from('forehandRecieves')
+            .delete()
+            .eq('id', analysis.recieves.fhRecievesId)
+
+            const { error: bhRecievesError } = await supabase
+            .from('backhandRecieves')
+            .delete()
+            .eq('id', analysis.recieves.bhRecievesId)
+
+            const { error: ralliesMoreError } = await supabase
+            .from('ralliesMore')
+            .delete()
+            .eq('id', analysis.rallies.ralliesMoreId)
+
+            const { error: ralliesLessError } = await supabase
+            .from('ralliesLess')
+            .delete()
+            .eq('id', analysis.rallies.ralliesLessId)
+
+            if (fhServesError || bhServesError || fhRecievesError || bhRecievesError || ralliesMoreError || ralliesLessError) {
+                setError(true)
+            } else {
+                router.reload()
+            }
         }
 
         if (error) {
