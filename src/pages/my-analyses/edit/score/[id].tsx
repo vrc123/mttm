@@ -78,13 +78,13 @@ export default function EditDate({ analysis }: EditDateProps) {
 
         if (validationArray.length === 0) {
 
-            const { data, error } = await supabase
+            const { error } = await supabase
             .from('analyses')
             .update({
                 score: playerSets + '/' + opponentSets
-            }).eq('id', analysis.id).select('*')
+            }).eq('id', analysis.id)
 
-            if (data) {
+            if (!error) {
                 router.push('/my-analyses/' + analysis.id)
             }
 

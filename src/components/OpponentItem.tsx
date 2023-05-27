@@ -1,8 +1,8 @@
 import styles from '@/styles/components/OpponentItem.module.css'
 import { supabase } from '../../supabase-client';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from './Button';
-import { useState } from 'react';
 import Delete from './Delete';
 
 interface OpponentItemProps {
@@ -31,7 +31,13 @@ interface Analysis {
 }
 
 interface AnalysisDeleteProps {
-    data: Analysis | null
+    data: Analysis | null;
+    error: {
+        code: string;
+        details: string;
+        hint: string;
+        message: string;
+    } | null;
 }
 
 export default function OpponentItem({ id, firstName, middleName, lastName, country, birthday }: OpponentItemProps) {
@@ -51,7 +57,7 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
    
     async function deleteOpponent() {
 
-        const { data: analyses, error} = await supabase
+        const { data: analyses, error: analysesError} = await supabase
         .from('analyses')
         .select('*')
         .eq('opponentId', id)
@@ -60,8 +66,8 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
 
             for (let i = 0; i < analyses.length; i++) {
 
-                const { data: analysis}: AnalysisDeleteProps = await supabase
-                .from('analyses')
+                const { data: analysis, error: analysisError }: AnalysisDeleteProps = await supabase
+                .from('analysess')
                 .select(`
                     opponentId,
                     serves ( 
@@ -117,22 +123,28 @@ export default function OpponentItem({ id, firstName, middleName, lastName, coun
                         setError(true)
                     }
                 }
+
+                if (analysisError) {
+                    setError(true)
+                }
             }
 
-            const { error } = await supabase
+            const { error: opponentsError } = await supabase
             .from('opponents')
             .delete()
             .eq('id', id)
 
-            if (error) {
+            if (opponentsError) {
                 setError(true)
-            } else {
-                router.reload()
             }
         }
-                    
-        if (error) {
+        
+        if (analysesError) {
             setError(true)
+        }
+
+        if (error == false) {
+            router.reload()
         }
     }
     

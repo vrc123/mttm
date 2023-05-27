@@ -70,13 +70,13 @@ export default function SelectOpponent({ data, analysis }: SelectOpponentProps) 
 
         if (opponent != 0) {
 
-            const { data, error } = await supabase
+            const { error } = await supabase
             .from('analyses')
             .update({
                 opponentId: opponent
-            }).eq('id', analysis.id).select('*')
+            }).eq('id', analysis.id)
 
-            if (data) {
+            if (!error) {
                 router.push('/my-analyses/' + analysis.id)
             }
 

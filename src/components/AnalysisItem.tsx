@@ -32,7 +32,13 @@ interface Analysis {
 }
 
 interface AnalysisDeleteProps {
-    data: Analysis | null
+    data: Analysis | null;
+    error: {
+        code: string;
+        details: string;
+        hint: string;
+        message: string;
+    } | null;
 }
 
 export default function AnalysisItem({ id, firstName, middleName, lastName, country, score, date, onClick }: AnalysisItemProps) {
@@ -48,7 +54,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
     
     async function deleteAnalysis() {        
 
-        const { data: analysis}: AnalysisDeleteProps = await supabase
+        const { data: analysis, error: analysisError }: AnalysisDeleteProps = await supabase
         .from('analyses')
         .delete()
         .eq('id', id)
@@ -107,7 +113,7 @@ export default function AnalysisItem({ id, firstName, middleName, lastName, coun
             }
         }
 
-        if (error) {
+        if (analysisError) {
             setError(true)
         }
     }
