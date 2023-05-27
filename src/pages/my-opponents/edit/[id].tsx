@@ -91,7 +91,7 @@ export default function EditOpponent({ opponent }: EditOpponentProps) {
 
         if (validationArray.length === 0) {
 
-            const { data, error } = await supabase
+            const { error } = await supabase
             .from('opponents')
             .update({
                 firstName: firstName,
@@ -99,9 +99,9 @@ export default function EditOpponent({ opponent }: EditOpponentProps) {
                 lastName: lastName,
                 country: country,
                 birthday: birthday
-            }).eq('id', opponent.id).select('*')
+            }).eq('id', opponent.id)
 
-            if (data) {
+            if (!error) {
                 router.push('/my-opponents/')
             }
 

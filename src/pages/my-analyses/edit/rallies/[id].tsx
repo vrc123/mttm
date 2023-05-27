@@ -105,43 +105,26 @@ export default function EditRallies({ analysis }: EditRalliesProps) {
 
         if (validationArray.length === 0) {
 
-            const { data: ralliesMore, error } = await supabase
+            const { error: moreError } = await supabase
             .from('ralliesMore')
             .update({
                 wins: moreWins,
                 loses: moreLoses,
-            }).eq('id', analysis.rallies.ralliesMore.id).select('*')
+            }).eq('id', analysis.rallies.ralliesMore.id)
 
-            if (ralliesMore) {
-                
-                const { data: ralliesLess, error } = await supabase
-                .from('ralliesLess')
-                .update({
-                    wins: lessWins,
-                    loses: lessLoses,
-                }).eq('id', analysis.rallies.ralliesLess.id).select('*')
+            const { error: lessError } = await supabase
+            .from('ralliesLess')
+            .update({
+                wins: lessWins,
+                loses: lessLoses,
+            }).eq('id', analysis.rallies.ralliesLess.id)
 
-                if (ralliesLess) {
+            if (!moreError && !lessError) {
+                router.push('/my-analyses/' + analysis.id)
+            }
 
-                    const { data: rallies, error } = await supabase
-                    .from('rallies')
-                    .update({
-                        ralliesMoreId: ralliesMore[0].id,
-                        ralliesLessId: ralliesLess[0].id,
-                    }).eq('id', analysis.rallies.id).select('*')
-
-                    if (rallies) {
-                        router.push('/my-analyses/' + analysis.id)
-                    }
-
-                    if (error) {
-                        setError(true)
-                    }
-                }
-                
-                if (error) {
-                    setError(true)
-                }
+            if (moreError || lessError) {
+                setError(true)
             }
 
         } else {

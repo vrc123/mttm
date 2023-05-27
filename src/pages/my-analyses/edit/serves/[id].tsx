@@ -191,7 +191,7 @@ export default function EditForehandServes({ analysis }: EditServesProps) {
 
         if (validationArray.length === 0) {
 
-            const { data: forehandServes, error } = await supabase
+            const { error: fhError } = await supabase
             .from('forehandServes')
             .update({
                 longFh: fhLongFh,
@@ -203,34 +203,27 @@ export default function EditForehandServes({ analysis }: EditServesProps) {
                 shortFh: fhShortFh,
                 shortMiddle: fhShortMiddle,
                 shortBh: fhShortBh,
-            }).eq('id', analysis.serves.forehandServes.id).select('*')
+            }).eq('id', analysis.serves.forehandServes.id)
 
-            if (forehandServes) {
+            const { error: bhError } = await supabase
+            .from('backhandServes')
+            .update({
+                longFh: bhLongFh,
+                longMiddle: bhLongMiddle,
+                longBh: bhLongBh,
+                halfLongFh: bhHalfLongFh,
+                halfLongMiddle: bhHalfLongMiddle,
+                halfLongBh: bhHalfLongBh,
+                shortFh: bhShortFh,
+                shortMiddle: bhShortMiddle,
+                shortBh: bhShortBh,
+            }).eq('id', analysis.serves.backhandServes.id)
 
-                const { data: backhandServes, error } = await supabase
-                .from('backhandServes')
-                .update({
-                    longFh: bhLongFh,
-                    longMiddle: bhLongMiddle,
-                    longBh: bhLongBh,
-                    halfLongFh: bhHalfLongFh,
-                    halfLongMiddle: bhHalfLongMiddle,
-                    halfLongBh: bhHalfLongBh,
-                    shortFh: bhShortFh,
-                    shortMiddle: bhShortMiddle,
-                    shortBh: bhShortBh,
-                }).eq('id', analysis.serves.backhandServes.id).select('*')
-
-                if(backhandServes) {
-                    router.push('/my-analyses/' + analysis.id)
-                }
-
-                if (error) {
-                    setError(true)
-                }
+            if (!fhError && !bhError) {
+                router.push('/my-analyses/' + analysis.id)
             }
 
-            if (error) {
+            if (fhError || bhError) {
                 setError(true)
             }
             
