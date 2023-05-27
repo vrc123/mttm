@@ -77,9 +77,10 @@ export default function AddOpponent() {
                 country: country,
                 birthday: birthday
             }]).select('*')
+            .single()
     
             if (data) {
-                dispatch(saveOpponentId(data[0].id))
+                dispatch(saveOpponentId(data.id))
                 
                 router.push('/my-analyses/create/score')
             }

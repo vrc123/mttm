@@ -64,7 +64,7 @@ export default function AddOpponent() {
     
         if (validationArray.length === 0) {
     
-            const { data, error } = await supabase
+            const { error } = await supabase
             .from('opponents')
             .insert([{
                 firstName: firstName,
@@ -72,9 +72,9 @@ export default function AddOpponent() {
                 lastName: lastName,
                 country: country,
                 birthday: birthday
-            }]).select('*')
+            }])
     
-            if (data) {                
+            if (!error) {                
                 router.push('/my-opponents')
             }
     
