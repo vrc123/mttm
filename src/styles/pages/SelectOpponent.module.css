@@ -24,3 +24,19 @@
     margin-top: 50px;
     text-align: center;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .selectOpponent {
+        padding: 100px 30px;
+    }
+
+    .selectOpponent h1 {
+        text-align: center;
+    }
+
+    .selectOpponent p {
+        text-align: center;
+    }
+
+}

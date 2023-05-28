@@ -11,3 +11,15 @@
 .addRallies h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .addRallies {
+        padding: 100px 30px;
+    }
+
+    .addRallies h1 {
+        text-align: center;
+    }
+
+}

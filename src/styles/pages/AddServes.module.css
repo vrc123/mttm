@@ -11,3 +11,15 @@
 .addServes h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .addServes {
+        padding: 100px 30px;
+    }
+
+    .addServes h1 {
+        text-align: center;
+    }
+
+}

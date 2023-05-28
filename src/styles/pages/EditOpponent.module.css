@@ -11,3 +11,15 @@
 .editOpponent h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .editOpponent {
+        padding: 100px 30px;
+    }
+
+    .editOpponent h1 {
+        text-align: center;
+    }
+
+}

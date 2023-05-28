@@ -40,3 +40,11 @@
     width: 100%;
     margin-top: 25px;
 }
+
+@media only screen and (max-width: 1024px) {
+
+    .error {
+        width: 300px;
+    }
+
+}

@@ -20,3 +20,19 @@
     display: flex;
     gap: 20px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .home {
+        padding: 100px 30px;
+    }
+
+    .home h1 {
+        text-align: center;
+    }
+
+    .home div {
+        flex-direction: column;
+    }
+
+}

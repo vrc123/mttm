@@ -11,3 +11,15 @@
 .editRallies h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .editRallies {
+        padding: 100px 30px;
+    }
+
+    .editRallies h1 {
+        text-align: center;
+    }
+
+}

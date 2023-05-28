@@ -16,3 +16,19 @@
 .opponentList button {
     margin-bottom: 25px;
 }
+
+@media only screen and (max-width: 1260px) {
+    
+    .list {
+        width: 620px;
+    }
+
+}
+
+@media only screen and (max-width: 1024px) {
+    
+    .list {
+        width: 300px;
+    }
+
+}

@@ -23,3 +23,19 @@
 .myAnalyses a {
     color: #ffaa00;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .myAnalyses {
+        padding: 100px 30px;
+    }
+
+    .myAnalyses h1 {
+        text-align: center;
+    }
+
+    .myAnalyses p {
+        text-align: center;
+    }
+
+}

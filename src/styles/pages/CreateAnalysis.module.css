@@ -11,3 +11,15 @@
 .createAnalysis h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .createAnalysis {
+        padding: 100px 30px;
+    }
+
+    .createAnalysis h1 {
+        text-align: center;
+    }
+
+}

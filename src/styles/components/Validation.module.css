@@ -65,3 +65,11 @@
     border-left: 10px solid #000000;
     background: #ffaa00;
 }
+
+@media only screen and (max-width: 1024px) {
+
+    .validation {
+        width: 300px;
+    }
+
+}

@@ -34,3 +34,16 @@
 .active p {
     color: #000000;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .selectOpponentItem {
+        flex-direction: column;
+    }
+
+    .selectOpponentItem p {
+        word-break: break-all;
+        text-align: left;
+    }
+
+}

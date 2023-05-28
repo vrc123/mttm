@@ -19,3 +19,19 @@
 .myOpponents a {
     color: #ffaa00;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .myOpponents {
+        padding: 100px 30px;
+    }
+
+    .myOpponents h1 {
+        text-align: center;
+    }
+
+    .myOpponents p {
+        text-align: center;
+    }
+
+}

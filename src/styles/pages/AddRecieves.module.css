@@ -11,3 +11,15 @@
 .addRecieves h1 {
     margin-bottom: 50px;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .addRecieves {
+        padding: 100px 30px;
+    }
+
+    .addRecieves h1 {
+        text-align: center;
+    }
+
+}
