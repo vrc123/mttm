@@ -27,3 +27,11 @@
 .analysisItem button:last-child {
     margin-bottom: 0;
 }
+
+@media only screen and (max-width: 1024px) {
+    
+    .analysisItem p {
+        text-align: left;
+    }
+
+}

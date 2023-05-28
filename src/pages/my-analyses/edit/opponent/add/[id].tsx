@@ -57,43 +57,43 @@ export default function AddOpponent({ analysis }: AddOpponentProps) {
         let validationArray = []
         
         if (!firstName) {
-            validationArray.push('Fill the first name field')
+            validationArray.push('- Fill the first name field')
         }
     
         if (firstName) {
             if (firstName[0] != firstName[0].toUpperCase()) {
-                validationArray.push('First name needs to be capitalized')
+                validationArray.push('- First name needs to be capitalized')
             }
         }
         
         if (middleName != '') {
             if (middleName[0] != middleName[0].toUpperCase()) {
-                validationArray.push('Middle name needs to be capitalized')
+                validationArray.push('- Middle name needs to be capitalized')
             }
         }
     
         if (!lastName) {
-            validationArray.push('Fill the last name field')
+            validationArray.push('- Fill the last name field')
         }
     
         if (lastName) {
             if (lastName[0] != lastName[0].toUpperCase()) {
-                validationArray.push('Last name needs to be capitalized')
+                validationArray.push('- Last name needs to be capitalized')
             }
         }
         
         if (!country) {
-            validationArray.push('Fill the country field')
+            validationArray.push('- Fill the country field')
         }
     
         if (country) {
             if (country[0] != country[0].toUpperCase()) {
-                validationArray.push('Country name needs to be capitalized')
+                validationArray.push('- Country name needs to be capitalized')
             }
         }
     
         if (!birthday) {
-            validationArray.push('Fill the birthday field')
+            validationArray.push('- Fill the birthday field')
         }
     
         if (validationArray.length === 0) {
