@@ -1,11 +1,13 @@
 describe('Test of MTTM', () => {
 
   before(() => {
-    cy.visit('http://localhost:3000/')
+    cy.visit('https://mttm.vercel.app/')
   })
 
   after(() => {
-    cy.visit('http://localhost:3000/my-opponents')
+    cy.visit('https://mttm.vercel.app/my-opponents')
+
+    cy.get('button').contains('Show').click()
 
     cy.get('.OpponentList_opponentList__xp7Ew').contains('.OpponentItem_opponentItem__8xMoL', 'Test Test Test').within(() => {
       cy.get('button').contains('Delete').click()
